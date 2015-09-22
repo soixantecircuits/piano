@@ -1,0 +1,3 @@
+(function (){
+  touchkey.init();
+})();

@@ -1,10 +1,8 @@
 # Touchkey ⌨
 
-[![Join the chat at https://gitter.im/soixantecircuits/touchkey](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/soixantecircuits/touchkey?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 #### Modular keyboard written in pure JavaScript.
 
-[![Gitter](https://badges.gitter.im/soixantecircuits/touchkey.svg)](https://github.com/soixantecircuits/touchkey)
+[![Join the chat at https://gitter.im/soixantecircuits/touchkey](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/soixantecircuits/touchkey?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 *Touchkey is still under active development.*
 

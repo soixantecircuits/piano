@@ -2,6 +2,8 @@
 
 #### Modular keyboard written in pure JavaScript.
 
+[![Gitter](https://badges.gitter.im/soixantecircuits/touchkey.svg)](https://github.com/soixantecircuits/touchkey)
+
 *Touchkey is still under active development.*
 
 # Usage
@@ -34,6 +36,6 @@ Just clone the repository and you'll be good to go.
 - Make sure it works well with requireJS.
 - Make sure it works well with angular, emberjs, react
 - Publish it to bower and be famous.
-- Test with IE11, Chrome, Firefox, 
+- Test with IE11, Chrome, Firefox,
 - Test embeded in electron
 - Support multiple instance for large touch screen

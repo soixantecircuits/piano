@@ -1,0 +1,35 @@
+.tk-container {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 70%;
+  max-width: 700px;
+  min-width: 340px;
+  background: #CCC;
+}
+.tk-container.left {
+  left: 0;
+}
+.tk-container.center {
+  left: 15%;
+}
+.tk-container.right {
+  right: 0;
+}
+.tk-container.top {
+  top: 0;
+}
+.tk-container.middle {
+  top: 50%;
+}
+.tk-container.bottom {
+  bottom: 0;
+}
+.tk-container ul {
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+.tk-container ul li {
+  display: inline;
+}

@@ -18,7 +18,8 @@ var touchkey = (function (k){
 
   k.init = function (){
     k.container = document.createElement('div');
-    k.container.id = 'touchkey-container';
+    k.container.id = 'touchkey';
+    k.container.className = "tk-container";
 
     k.triggers = document.querySelectorAll('input[data-touchkey]');
     for (var i = 0; i < k.triggers.length; i++) {
@@ -45,7 +46,11 @@ var touchkey = (function (k){
     var datas = target.dataset;
     var options = {};
 
-    options.position = (datas.touchkeyPosition) ? datas.touchkeyPosition.split(',') : [];
+    if(datas.touchkeyPosition.indexOf('absolute') > -1){
+      options.position = datas.touchkeyPosition.replace(/absolute,\s/gi, '').split(',');
+    } else {
+      options.position = (datas.touchkeyPosition) ? datas.touchkeyPosition.split(',') : [];
+    }
     options.layout = datas.touchkeyLayout;
 
     _k.settings = {
@@ -56,11 +61,18 @@ var touchkey = (function (k){
       layout: options.layout || 'default'
     }
 
-    target.addEventListener('click', function (event){
+    var events = ['click', 'touchend'];
+    for (var i = 0; i < events.length; i++) {
+      target.addEventListener(events[i], function (event){
+        triggerHandler(event);
+      });
+    };
+
+    function triggerHandler (event){
       k.currentTarget = event.target;
       k.hideKeyboard();
       displayKeyboard(_k);
-    });
+    }
   }
 
   function displayKeyboard (instance){
@@ -83,12 +95,22 @@ var touchkey = (function (k){
       list.appendChild(li);
     }
 
+    if(isNaN(instance.settings.position.x) || isNaN(instance.settings.position.y)){
+      k.container.className += ' ' + instance.settings.position.x;
+      k.container.className += ' ' + instance.settings.position.y;
+    } else {
+      k.container.style.left = instance.settings.position.x + 'px';
+      k.container.style.top = instance.settings.position.y + 'px';
+    }
+
     k.container.appendChild(list);
   }
 
   k.hideKeyboard = function (){
     if(k.container.firstChild){
       k.container.firstChild.remove();
+      k.container.style.top = k.container.style.left = '';
+      k.container.className = "tk-container";
     }
   }
 

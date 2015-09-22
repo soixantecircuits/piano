@@ -17,7 +17,33 @@ Download [touchkey](touchkey.js) and at least the [default layout](layouts/defau
   <script src="path/to/layouts/default.js"></script>
 ```
 
+Then, add the `data-touchkey` attribute to trigger the keyboard on click/touch.
+
+#### Demo
+
 You can open the `demo/index.html` file in a web browser to check a demo.
+
+# Positionning / styling
+
+You can define positionning with the `data-touchkey-position` attribute. You can use the following:
+
+`'left', 'center', 'right' -> x axis`
+
+`'top', 'middle', 'bottom' -> y axis`
+
+For example:
+
+```html
+<input type="text" data-touchkey data-touchkey-position="left, center" />
+```
+
+Or, with the `absolute` keyword, you can define absolute x and y positions:
+
+```html
+<input type="text" data-touchkey data-touchkey-position="absolute, 100, 150" />
+```
+
+Default positions are `'center, bottom'`.
 
 # Layouts
 

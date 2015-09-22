@@ -56,6 +56,8 @@ Just clone the repository and you'll be good to go.
 # To Do
 
 - Add space, backspace, etc, support (i.e finish default layout).
+- Support accentuation.
+- Support modifier (maj, alt, ctrl/cmd).
 - Add nice style and animation.
 - Make sure keys are still visible when someone has its finger on it (cf. Android/iOS keyboards).
 - Support hammer.js and/or other touch events librarie.

@@ -83,15 +83,18 @@ var touchkey = (function (k){
 
     for(var i in layout){
       var li = document.createElement('li');
-      var key = document.createElement('button');
-      key.className = 'touchkey';
-      key.textContent = layout[i];
-      key.addEventListener('click', function (event){
-        k.currentTarget.focus();
-        k.currentTarget.value += event.target.textContent;
-      })
+      if(layout[i] == 'break'){
+        li.className = 'break';
+      } else {
+        var key = document.createElement('button');
+        key.className = 'touchkey ' + layout[i];
+        key.textContent = layout[i];
+        key.addEventListener('click', function (event){
+          keyPressed(event);
+        });
+        li.appendChild(key)
+      }
 
-      li.appendChild(key)
       list.appendChild(li);
     }
 
@@ -104,6 +107,22 @@ var touchkey = (function (k){
     }
 
     k.container.appendChild(list);
+  }
+
+  function keyPressed (event){
+    k.currentTarget.focus();
+    var value = event.target.textContent;
+    switch(value){
+      case 'del':
+        k.currentTarget.value = k.currentTarget.value.substr(0, k.currentTarget.value.length - 1);
+        break;
+      case 'space':
+        k.currentTarget.value += ' ';
+        break;
+      default:
+        k.currentTarget.value += value;
+        break;
+    }
   }
 
   k.hideKeyboard = function (){

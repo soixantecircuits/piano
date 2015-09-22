@@ -29,7 +29,15 @@
   margin: 0;
   padding: 0;
   width: auto;
+  text-align: center;
 }
 .tk-container ul li {
   display: inline;
+}
+.tk-container ul li.break:after {
+  content: "\A";
+  white-space: pre;
+}
+.tk-container ul li .space {
+  padding: .3em 3em;
 }

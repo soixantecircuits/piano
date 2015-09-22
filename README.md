@@ -55,7 +55,6 @@ Just clone the repository and you'll be good to go.
 
 # To Do
 
-- Add space, backspace, etc, support (i.e finish default layout).
 - Support accentuation.
 - Support modifier (maj, alt, ctrl/cmd).
 - Add nice style and animation.

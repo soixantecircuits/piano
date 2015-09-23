@@ -39,7 +39,6 @@ var touchkey = (function (k){
     var _k = clone(parent);
     delete _k.triggers;
     delete _k.layouts;
-    parent.currentKeyboard = _k;
     var datas = target.dataset;
     var options = {};
 
@@ -77,6 +76,7 @@ var touchkey = (function (k){
   function displayKeyboard (instance){
     var list = document.createElement('ul');
     list.id = 'touchkey-list';
+    k.currentKeyboard = instance;
 
     var layout = k.layouts[instance.settings.layout];
 
@@ -87,7 +87,7 @@ var touchkey = (function (k){
       } else {
         var key = document.createElement('button');
         key.className = 'touchkey ' + layout[i];
-        key.textContent = layout[i];
+        key.textContent = (k.currentKeyboard.shift && layout[i].length > 1) ? layout[i][1] : layout[i][0];
         key.addEventListener('click', function (event){
           keyPressed(event);
         });
@@ -124,10 +124,17 @@ var touchkey = (function (k){
   }
 
   k.switchCase = function (){
-    k.currentKeyboard.shift = !k.currentKeyboard.shift;
+    var shift = k.currentKeyboard.shift = !k.currentKeyboard.shift;
     var keys = document.querySelectorAll('.touchkey');
+    var layout = k.layouts[k.currentKeyboard.settings.layout];
+
     for (var i = 0; i < keys.length; i++) {
-      keys[i].textContent = (k.currentKeyboard.shift) ? keys[i].textContent.toUpperCase() : keys[i].textContent.toLowerCase();
+      var value = keys[i].textContent;
+      if(layout[i].length > 1 && layout[i][0].length > 1){
+        keys[i].textContent = (shift) ? layout[i][1] : layout[i][0];
+      } else {
+        keys[i].textContent = (shift) ? value.toUpperCase() : value.toLowerCase();
+      }
     }
   }
 

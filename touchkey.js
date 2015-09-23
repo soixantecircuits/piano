@@ -112,7 +112,7 @@ var touchkey = (function (k){
     k.currentTarget.focus();
     var value = event.target.textContent;
 
-    if(/^space?/i.test(value)){
+    if(/^del?/i.test(value)){
       k.currentTarget.value = k.currentTarget.value.substr(0, k.currentTarget.value.length - 1);
     } else if(/^space?/i.test(value)){
       k.currentTarget.value += ' ';

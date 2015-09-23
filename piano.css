@@ -34,7 +34,7 @@
 .tk-container ul li {
   display: inline;
 }
-.tk-container ul li .touchkey {
+.tk-container ul li .key {
   margin: .1em;
   padding: 0 1em;
   height: 2em;

@@ -1,4 +1,4 @@
 (function (){
-  touchkey.init();
+  piano.init();
   document.querySelector('#input-2').click();
 })();

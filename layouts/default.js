@@ -1,5 +1,5 @@
 /**
- * Touchkey
+ * Piano
  * Desktop browser keyboard for touch screens
  *
  * Default layout (QWERTY)
@@ -17,4 +17,4 @@
     ['a'], ['s'], ['d'], ['f'], ['g'], ['h'], ['j'], ['k'], ['l'], [';', ':'], ['\'', '"'], ['break'],
     ['z'], ['x'], ['c'], ['v'], ['b'], ['n'], ['m'], [',', '<'], ['.', '>'], ['/', '?'], [{name: 'shift', value: '⇧'}], ['break'],
     [{name: 'space', value: ' '}]]
-})(touchkey || {});
+})(piano || {});

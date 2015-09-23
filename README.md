@@ -1,23 +1,23 @@
-# Touchkey ⌨
+# Piano ⌨
 
 #### Modular keyboard written in pure JavaScript.
 
-[![Join the chat at https://gitter.im/soixantecircuits/touchkey](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/soixantecircuits/touchkey?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/soixantecircuits/piano](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/soixantecircuits/piano?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-*Touchkey is still under active development.*
+*Piano is still under active development.*
 
 # Usage
 
-Download [touchkey](touchkey.js) and at least the [default layout](layouts/default.js) into your project and load them.
+Download [piano](piano.js) and at least the [default layout](layouts/default.js) into your project and load them.
 
 ```html
   <!-- Load the librarie -->
-  <script src="path/to/touchkey.js"></script>
+  <script src="path/to/piano.js"></script>
   <!-- And at least the default layout -->
   <script src="path/to/layouts/default.js"></script>
 ```
 
-Then, add the `data-touchkey` attribute to trigger the keyboard on click/touch.
+Then, add the `data-piano` attribute to trigger the keyboard on click/touch.
 
 #### Demo
 
@@ -25,7 +25,7 @@ Make sure you have `node`, `npm` and `gulp` installed. You can run `gulp serve` 
 
 # Positionning / styling
 
-You can define positionning with the `data-touchkey-position` attribute. You can use the following:
+You can define positionning with the `data-piano-position` attribute. You can use the following:
 
 `'left', 'center', 'right' -> x axis`
 
@@ -34,13 +34,13 @@ You can define positionning with the `data-touchkey-position` attribute. You can
 For example:
 
 ```html
-<input type="text" data-touchkey data-touchkey-position="left, center" />
+<input type="text" data-piano data-piano-position="left, center" />
 ```
 
 Or, with the `absolute` keyword, you can define absolute x and y positions:
 
 ```html
-<input type="text" data-touchkey data-touchkey-position="absolute, 100, 150" />
+<input type="text" data-piano data-piano-position="absolute, 100, 150" />
 ```
 
 Default positions are `'center, bottom'`.

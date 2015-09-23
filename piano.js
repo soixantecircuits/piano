@@ -1,5 +1,5 @@
 /**
- * Touchkey
+ * Piano
  * Desktop browser keyboard for touch screens
  *
  * @author hugohil <hugo@soixantecircuits.fr>
@@ -11,17 +11,17 @@
  *   - Add space, backspace, etc
  */
 
-var touchkey = (function (k){
+var piano = (function (k){
   'use strict';
 
   var k = {};
 
   k.init = function (){
     k.container = document.createElement('div');
-    k.container.id = 'touchkey';
+    k.container.id = 'piano';
     k.container.className = "tk-container";
 
-    k.triggers = document.querySelectorAll('input[data-touchkey]');
+    k.triggers = document.querySelectorAll('input[data-piano]');
     for (var i = 0; i < k.triggers.length; i++) {
       createKeyboard(k, k.triggers[i]);
     }
@@ -29,7 +29,7 @@ var touchkey = (function (k){
 
     // Make sure to hide keyboard when clicking outside
     document.addEventListener('click', function (event){
-      if(event.target.dataset.touchkey != '' && !k.container.contains(event.target)){
+      if(event.target.dataset.piano != '' && !k.container.contains(event.target)){
         k.hideKeyboard();
       }
     });
@@ -44,12 +44,12 @@ var touchkey = (function (k){
 
     _k.shift = false;
 
-    if(datas.touchkeyPosition.indexOf('absolute') > -1){
-      options.position = datas.touchkeyPosition.replace(/absolute,\s/gi, '').split(',');
+    if(datas.pianoPosition.indexOf('absolute') > -1){
+      options.position = datas.pianoPosition.replace(/absolute,\s/gi, '').split(',');
     } else {
-      options.position = (datas.touchkeyPosition) ? datas.touchkeyPosition.split(',') : [];
+      options.position = (datas.pianoPosition) ? datas.pianoPosition.split(',') : [];
     }
-    options.layout = datas.touchkeyLayout;
+    options.layout = datas.pianoLayout;
 
     _k.settings = {
       position: {
@@ -75,7 +75,7 @@ var touchkey = (function (k){
 
   function displayKeyboard (instance){
     var list = document.createElement('ul');
-    list.id = 'touchkey-list';
+    list.id = 'piano-list';
     k.currentKeyboard = instance;
 
     var layout = k.layouts[instance.settings.layout];
@@ -87,10 +87,10 @@ var touchkey = (function (k){
       } else {
         var key = document.createElement('button');
         if(typeof(layout[i][0]) == 'object'){
-          key.className = 'touchkey ' + layout[i][0].name;
+          key.className = 'key ' + layout[i][0].name;
           key.textContent = layout[i][0].value;
         } else {
-          key.className = 'touchkey ' + layout[i];
+          key.className = 'key ' + layout[i];
           key.textContent = layout[i][0];
         }
         key.addEventListener('click', function (event){
@@ -131,7 +131,7 @@ var touchkey = (function (k){
 
   k.switchCase = function (){
     var shift = k.currentKeyboard.shift = !k.currentKeyboard.shift;
-    var keys = document.querySelectorAll('#touchkey-list li');
+    var keys = document.querySelectorAll('#piano-list li');
     var layout = k.layouts[k.currentKeyboard.settings.layout];
 
     for (var i = 0; i < keys.length; i++) {
@@ -165,4 +165,4 @@ var touchkey = (function (k){
   }
 
   return k;
-})(touchkey || {});
+})(piano || {});

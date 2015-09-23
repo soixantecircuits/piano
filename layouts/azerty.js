@@ -1,5 +1,5 @@
 /**
- * Touchkey
+ * Piano
  * Desktop browser keyboard for touch screens
  *
  * AZERTY layout
@@ -12,4 +12,4 @@
 (function (k){
   k.layouts = k.layouts || [];
   k.layouts['azerty'] = ['a', 'z', 'e', 'r', 't', 'y'];
-})(touchkey || {});
+})(piano || {});

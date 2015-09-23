@@ -1,0 +1,27 @@
+{
+  "name": "touchkey",
+  "version": "1.0.0",
+  "description": "#### Modular keyboard written in pure JavaScript.",
+  "main": "touchkey.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soixantecircuits/touchkey.git"
+  },
+  "keywords": [
+    "touch",
+    "keyboard"
+  ],
+  "author": "hugohil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soixantecircuits/touchkey/issues"
+  },
+  "homepage": "https://github.com/soixantecircuits/touchkey#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-live-server": "0.0.28"
+  }
+}

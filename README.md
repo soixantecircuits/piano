@@ -21,7 +21,7 @@ Then, add the `data-touchkey` attribute to trigger the keyboard on click/touch.
 
 #### Demo
 
-You can open the `demo/index.html` file in a web browser to check a demo.
+Make sure you have `node`, `npm` and `gulp` installed. You can run `gulp serve` and go to `http://localhost:8080/demo` to check a demo.
 
 # Positionning / styling
 

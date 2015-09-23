@@ -28,7 +28,7 @@ var piano = (function (k){
     document.body.appendChild(k.container);
 
     // Make sure to hide keyboard when clicking outside
-    document.addEventListener('click', function (event){
+    addMultipleListeners(['click', 'touchdown'], document, function (event){
       if(event.target.dataset.piano != '' && !k.container.contains(event.target)){
         k.hideKeyboard();
       }
@@ -59,12 +59,9 @@ var piano = (function (k){
       layout: options.layout || 'default'
     }
 
-    var events = ['click', 'touchend'];
-    for (var i = 0; i < events.length; i++) {
-      target.addEventListener(events[i], function (event){
-        triggerHandler(event);
-      });
-    };
+    addMultipleListeners(['click', 'touchdown'], target, function (event){
+      triggerHandler(event);
+    });
 
     function triggerHandler (event){
       k.currentTarget = event.target;
@@ -93,7 +90,7 @@ var piano = (function (k){
           key.className = 'key ' + layout[i];
           key.textContent = layout[i][0];
         }
-        key.addEventListener('click', function (event){
+        addMultipleListeners(['click', 'touchdown'], key, function (event){
           keyPressed(event);
         });
         li.appendChild(key)
@@ -153,6 +150,14 @@ var piano = (function (k){
       k.container.style.top = k.container.style.left = '';
       k.container.className = "piano-container";
       k.currentKeyboard = null;
+    }
+  }
+
+  function addMultipleListeners (events, target, handler){
+    for (var i = 0; i < events.length; i++) {
+      target.addEventListener(events[i], function (event){
+        handler(event);
+      });
     }
   }
 

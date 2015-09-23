@@ -2,16 +2,14 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  width: 70%;
-  max-width: 700px;
-  min-width: 340px;
-  background: rgba(0, 0, 0, .1);
+  width: 100%;
 }
 .piano-container.left {
   left: 0;
 }
 .piano-container.center {
-  left: 15%;
+  margin: auto;
+  left: 0;
 }
 .piano-container.right {
   right: 0;
@@ -26,24 +24,43 @@
   bottom: 0;
 }
 .piano-container ul {
-  margin: 0;
-  padding: 0;
-  width: auto;
+  margin: auto;
+  padding: .25em 0;
+  max-width: 1080px;
+  min-width: 340px;
   text-align: center;
+  background: rgba(0, 0, 0, .9);
 }
 .piano-container ul li {
   display: inline;
 }
 .piano-container ul li .key {
-  margin: .1em;
-  padding: 0 1em;
-  height: 2em;
-  border: 1px solid #555;
+  margin: .2em;
+  padding: 0;
+  height: 3em;
+  width: 3.5em;
+  background: #2F2E34;
+  color: #FFF;
+  font-size: 1em;
+  border: none;
+  user-select: none;
+  -o-user-select:none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+.piano-container ul li .key:active {
+  background: #2323AA;
+  outline: none;
+}
+.piano-container ul li .key:focus {
+  outline: none;
 }
 .piano-container ul li.break:after {
   content: "\A";
   white-space: pre;
 }
 .piano-container ul li .space {
-  padding: .3em 6em;
+  padding: .3em 12.5em;
 }

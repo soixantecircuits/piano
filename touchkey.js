@@ -125,15 +125,18 @@ var touchkey = (function (k){
 
   k.switchCase = function (){
     var shift = k.currentKeyboard.shift = !k.currentKeyboard.shift;
-    var keys = document.querySelectorAll('.touchkey');
+    var keys = document.querySelectorAll('#touchkey-list li');
     var layout = k.layouts[k.currentKeyboard.settings.layout];
 
     for (var i = 0; i < keys.length; i++) {
-      var value = keys[i].textContent;
-      if(layout[i].length > 1 && layout[i][0].length > 1){
-        keys[i].textContent = (shift) ? layout[i][1] : layout[i][0];
-      } else {
-        keys[i].textContent = (shift) ? value.toUpperCase() : value.toLowerCase();
+      var target = keys[i].children[0];
+      if(target){
+        var value = target.textContent;
+        if(layout[i].length > 1 && layout[i][0].length > 0){
+          target.textContent = (shift) ? layout[i][1] : layout[i][0];
+        } else {
+          target.textContent = (shift) ? value.toUpperCase() : value.toLowerCase();
+        }
       }
     }
   }
@@ -143,6 +146,7 @@ var touchkey = (function (k){
       k.container.firstChild.remove();
       k.container.style.top = k.container.style.left = '';
       k.container.className = "tk-container";
+      k.currentKeyboard = null;
     }
   }
 

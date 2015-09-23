@@ -29,12 +29,8 @@ var touchkey = (function (k){
 
     // Make sure to hide keyboard when clicking outside
     document.addEventListener('click', function (event){
-      if(event.target.dataset.touchkey != '' && event.target.className != 'touchkey'){
-        for (var i = 0; i < k.triggers.length; i++) {
-          if(event.target.id != k.triggers[i].id){
-            k.hideKeyboard();
-          }
-        }
+      if(event.target.dataset.touchkey != '' && !k.container.contains(event.target)){
+        k.hideKeyboard();
       }
     });
   }

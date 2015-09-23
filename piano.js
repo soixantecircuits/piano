@@ -151,7 +151,7 @@ var piano = (function (k){
     if(k.container.firstChild){
       k.container.firstChild.remove();
       k.container.style.top = k.container.style.left = '';
-      k.container.className = "tk-container";
+      k.container.className = "piano-container";
       k.currentKeyboard = null;
     }
   }

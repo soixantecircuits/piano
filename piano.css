@@ -1,4 +1,4 @@
-.tk-container {
+.piano-container {
   margin: 0;
   padding: 0;
   position: absolute;
@@ -7,43 +7,43 @@
   min-width: 340px;
   background: rgba(0, 0, 0, .1);
 }
-.tk-container.left {
+.piano-container.left {
   left: 0;
 }
-.tk-container.center {
+.piano-container.center {
   left: 15%;
 }
-.tk-container.right {
+.piano-container.right {
   right: 0;
 }
-.tk-container.top {
+.piano-container.top {
   top: 0;
 }
-.tk-container.middle {
+.piano-container.middle {
   top: 50%;
 }
-.tk-container.bottom {
+.piano-container.bottom {
   bottom: 0;
 }
-.tk-container ul {
+.piano-container ul {
   margin: 0;
   padding: 0;
   width: auto;
   text-align: center;
 }
-.tk-container ul li {
+.piano-container ul li {
   display: inline;
 }
-.tk-container ul li .key {
+.piano-container ul li .key {
   margin: .1em;
   padding: 0 1em;
   height: 2em;
   border: 1px solid #555;
 }
-.tk-container ul li.break:after {
+.piano-container ul li.break:after {
   content: "\A";
   white-space: pre;
 }
-.tk-container ul li .space {
+.piano-container ul li .space {
   padding: .3em 6em;
 }

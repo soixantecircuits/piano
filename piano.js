@@ -19,7 +19,7 @@ var piano = (function (k){
   k.init = function (){
     k.container = document.createElement('div');
     k.container.id = 'piano';
-    k.container.className = "tk-container";
+    k.container.className = "piano-container";
 
     k.triggers = document.querySelectorAll('input[data-piano]');
     for (var i = 0; i < k.triggers.length; i++) {

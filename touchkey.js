@@ -86,8 +86,13 @@ var touchkey = (function (k){
         li.className = 'break';
       } else {
         var key = document.createElement('button');
-        key.className = 'touchkey ' + layout[i];
-        key.textContent = (k.currentKeyboard.shift && layout[i].length > 1) ? layout[i][1] : layout[i][0];
+        if(typeof(layout[i][0]) == 'object'){
+          key.className = 'touchkey ' + layout[i][0].name;
+          key.textContent = layout[i][0].value;
+        } else {
+          key.className = 'touchkey ' + layout[i];
+          key.textContent = layout[i][0];
+        }
         key.addEventListener('click', function (event){
           keyPressed(event);
         });
@@ -110,13 +115,14 @@ var touchkey = (function (k){
 
   function keyPressed (event){
     k.currentTarget.focus();
-    var value = event.target.textContent;
+    var target = event.target;
+    var value = target.textContent;
 
-    if(/^del?/i.test(value)){
+    if(/del/i.test(target.className)){
       k.currentTarget.value = k.currentTarget.value.substr(0, k.currentTarget.value.length - 1);
-    } else if(/^space?/i.test(value)){
+    } else if(/space/i.test(target.className)){
       k.currentTarget.value += ' ';
-    } else if(/^shift?/i.test(value)){
+    } else if(/shift/i.test(target.className)){
       k.switchCase();
     } else {
       k.currentTarget.value += value;

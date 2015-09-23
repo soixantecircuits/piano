@@ -56,7 +56,7 @@ Just clone the repository and you'll be good to go.
 # To Do
 
 - Support accentuation.
-- Support modifier (maj, alt, ctrl/cmd).
+- Support modifier (shift, alt, ctrl/cmd).
 - Add nice style and animation.
 - Make sure keys are still visible when someone has its finger on it (cf. Android/iOS keyboards).
 - Support hammer.js and/or other touch events librarie.
@@ -66,3 +66,4 @@ Just clone the repository and you'll be good to go.
 - Test with IE11, Chrome, Firefox,
 - Test embeded in electron
 - Support multiple instance for large touch screen
+- Make keyboard draggable

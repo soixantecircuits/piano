@@ -5,7 +5,7 @@
   width: 70%;
   max-width: 700px;
   min-width: 340px;
-  background: #CCC;
+  background: rgba(0, 0, 0, .1);
 }
 .tk-container.left {
   left: 0;
@@ -33,6 +33,12 @@
 }
 .tk-container ul li {
   display: inline;
+}
+.tk-container ul li .touchkey {
+  margin: .1em;
+  padding: 0 1em;
+  height: 2em;
+  border: 1px solid #555;
 }
 .tk-container ul li.break:after {
   content: "\A";

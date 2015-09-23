@@ -39,8 +39,11 @@ var touchkey = (function (k){
     var _k = clone(parent);
     delete _k.triggers;
     delete _k.layouts;
+    parent.currentKeyboard = _k;
     var datas = target.dataset;
     var options = {};
+
+    _k.shift = false;
 
     if(datas.touchkeyPosition.indexOf('absolute') > -1){
       options.position = datas.touchkeyPosition.replace(/absolute,\s/gi, '').split(',');
@@ -108,16 +111,23 @@ var touchkey = (function (k){
   function keyPressed (event){
     k.currentTarget.focus();
     var value = event.target.textContent;
-    switch(value){
-      case 'del':
-        k.currentTarget.value = k.currentTarget.value.substr(0, k.currentTarget.value.length - 1);
-        break;
-      case 'space':
-        k.currentTarget.value += ' ';
-        break;
-      default:
-        k.currentTarget.value += value;
-        break;
+
+    if(/^space?/i.test(value)){
+      k.currentTarget.value = k.currentTarget.value.substr(0, k.currentTarget.value.length - 1);
+    } else if(/^space?/i.test(value)){
+      k.currentTarget.value += ' ';
+    } else if(/^shift?/i.test(value)){
+      k.switchCase();
+    } else {
+      k.currentTarget.value += value;
+    }
+  }
+
+  k.switchCase = function (){
+    k.currentKeyboard.shift = !k.currentKeyboard.shift;
+    var keys = document.querySelectorAll('.touchkey');
+    for (var i = 0; i < keys.length; i++) {
+      keys[i].textContent = (k.currentKeyboard.shift) ? keys[i].textContent.toUpperCase() : keys[i].textContent.toLowerCase();
     }
   }
 

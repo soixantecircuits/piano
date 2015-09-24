@@ -21,7 +21,7 @@ Then, add the `data-piano` attribute to trigger the keyboard on click/touch.
 
 #### Demo
 
-Make sure you have `node`, `npm` and `gulp` installed. You can run `gulp serve` and go to `http://localhost:8080/demo` to check a demo.
+Make sure you have `node`, `npm` and `gulp` installed. After you have installed development dependencies with `npm i`, you can run `gulp serve` and go to `http://localhost:8080/demo` to check a demo.
 
 # Positionning / styling
 

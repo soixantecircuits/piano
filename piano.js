@@ -107,19 +107,30 @@ var piano = (function (k){
   }
 
   function keyPressed (event){
-    k.currentTarget.focus();
     var target = event.target;
     var value = target.textContent;
+    var input = k.currentTarget;
+    var cursor = input.selectionStart;
+    var end = input.selectionEnd;
+    var diff = (end - cursor) || 1;
+    var offset = 1;
 
+    // There are still small bugs with selections.
     if(/del/i.test(target.className)){
-      k.currentTarget.value = k.currentTarget.value.substr(0, k.currentTarget.value.length - 1);
+      var deleteOffset = (cursor) ? -1 : 0;
+      input.value = insertToString(input.value, (cursor + deleteOffset), diff, '');
+      offset = -1;
     } else if(/space/i.test(target.className)){
-      k.currentTarget.value += ' ';
+      input.value = insertToString(input.value, cursor, (diff - 1), ' ');
     } else if(/shift/i.test(target.className)){
       k.switchCase();
     } else {
-      k.currentTarget.value += value;
+      input.value = insertToString(input.value, cursor, (diff - 1), value);
     }
+
+    input.selectionStart = cursor + offset;
+    input.selectionEnd = cursor + offset;
+    input.focus();
   }
 
   k.switchCase = function (){
@@ -149,6 +160,11 @@ var piano = (function (k){
     }
   }
 
+  // Found on http://stackoverflow.com/a/21350614/2033455
+  function insertToString (str, index, count, add){
+    return str.slice(0, index) + (add || "") + str.slice(index + count);
+  }
+
   function addMultipleListeners (events, target, handler){
     for (var i = 0; i < events.length; i++) {
       target.addEventListener(events[i], function (event){
@@ -157,10 +173,10 @@ var piano = (function (k){
     }
   }
 
-  function clone (src) {
+  function clone (src){
     var dest = {};
     for (var key in src) {
-        dest[key] = src[key];
+      dest[key] = src[key];
     }
     return dest;
   }

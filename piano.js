@@ -40,8 +40,12 @@ var piano = (function (k){
 
     _k.shift = false;
 
-    if(datas.pianoPosition.indexOf('absolute') > -1){
-      options.position = datas.pianoPosition.replace(/absolute,\s/gi, '').split(',');
+    if(datas.pianoPosition){
+      if(datas.pianoPosition.indexOf('absolute') > -1){
+        options.position = datas.pianoPosition.replace(/absolute,\s/gi, '').split(',');
+      } else {
+        console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target);
+      }
     } else {
       options.position = (datas.pianoPosition) ? datas.pianoPosition.split(',') : [];
     }

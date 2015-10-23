@@ -3,6 +3,7 @@
   padding: 0;
   position: absolute;
   width: 100%;
+  z-index: 999;
 }
 .piano-container.left {
   left: 0;

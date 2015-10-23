@@ -59,10 +59,7 @@ Just clone the repository and you'll be good to go.
 - Add nice style and animation.
 - Make sure keys are still visible when someone has its finger on it (cf. Android/iOS keyboards).
 - Support hammer.js and/or other touch events librarie.
-- Make sure it works well with requireJS.
-- Make sure it works well with angular, emberjs, react
+- Make sure it works well with requireJS, AngularJS, MetoarJS, React.
 - Publish it to bower and be famous.
-- Test with IE11, Chrome, Firefox,
-- Test embeded in electron
-- Support multiple instance for large touch screen
-- Make keyboard draggable
+- Test with IE11, Chrome, Firefox.
+- Test embeded in electron and nwjs.

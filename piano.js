@@ -5,10 +5,6 @@
  * @author hugohil <hugo@soixantecircuits.fr>
  * @license MIT
  * @version 1.0b
- *
- * @todo:
- *   - Support hammer.js and/or other touch events librarie
- *   - Add space, backspace, etc
  */
 
 var piano = (function (k){

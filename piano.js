@@ -44,10 +44,10 @@ var piano = (function (k){
       if(datas.pianoPosition.indexOf('absolute') > -1){
         options.position = datas.pianoPosition.replace(/absolute,\s/gi, '').split(',');
       } else {
-        console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target);
+        options.position = (datas.pianoPosition) ? datas.pianoPosition.split(',') : [];
       }
     } else {
-      options.position = (datas.pianoPosition) ? datas.pianoPosition.split(',') : [];
+        console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target);
     }
     options.layout = datas.pianoLayout;
 

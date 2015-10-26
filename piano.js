@@ -48,15 +48,18 @@ var piano = (function (k){
       }
     } else {
         console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target);
+        options.position = [];
     }
     options.layout = datas.pianoLayout;
+    options.limit = datas.pianoLimit;
 
     _k.settings = {
       position: {
         x: options.position[0] || 'center',
         y: options.position[1] || 'bottom'
       },
-      layout: options.layout || 'default'
+      layout: options.layout || 'default',
+      limit: options.limit || 0
     }
 
     addMultipleListeners(['click', 'touchdown'], target, function (event){
@@ -127,7 +130,9 @@ var piano = (function (k){
       input.value = insertToString(input.value, (cursor + deleteOffset), diff, '');
       offset = -1;
     } else if(/space/i.test(target.className)){
-      input.value = insertToString(input.value, cursor, (diff - 1), ' ');
+      if(input.value.length <= k.currentKeyboard.settings.limit){
+        input.value = insertToString(input.value, cursor, (diff - 1), ' ');
+      }
     } else if(/shift/i.test(target.className)){
       k.switchCase();
     } else if(/larr/i.test(target.className)){
@@ -137,7 +142,9 @@ var piano = (function (k){
     } else if(/hide/i.test(target.className)){
       k.hideKeyboard();
     } else {
-      input.value = insertToString(input.value, cursor, (diff - 1), value);
+      if(input.value.length <= k.currentKeyboard.settings.limit){
+        input.value = insertToString(input.value, cursor, (diff - 1), value);
+      }
     }
 
     input.selectionStart = cursor + offset;

@@ -76,6 +76,7 @@
   width: 4em;
   line-height: 3.3em;
   background: #706E7A;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .7);
 }
 .piano-container ul li .space:active:after {
   display: none;

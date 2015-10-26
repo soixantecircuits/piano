@@ -50,6 +50,7 @@
   -khtml-user-select: none;
   -webkit-user-select: none;
   cursor: pointer;
+  position: relative;
 }
 .piano-container ul li .key:active {
   background: #2323AA;
@@ -64,4 +65,18 @@
 }
 .piano-container ul li .space {
   padding: .3em 12.5em;
+}
+.piano-container ul li .key:active:after {
+  content: attr(data-piano-key);
+  display: inline-block;
+  position: absolute;
+  bottom: 4em;
+  left: -.2em;
+  height: 3.5em;
+  width: 4em;
+  line-height: 3.3em;
+  background: #706E7A;
+}
+.piano-container ul li .space:active:after {
+  display: none;
 }

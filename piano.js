@@ -86,9 +86,11 @@ var piano = (function (k){
         if(typeof(layout[i][0]) == 'object'){
           key.className = 'key ' + layout[i][0].name;
           key.textContent = layout[i][0].value;
+          key.dataset.pianoKey = layout[i][0].value;
         } else {
           key.className = 'key ' + layout[i];
           key.textContent = layout[i][0];
+          key.dataset.pianoKey = layout[i][0];
         }
         addMultipleListeners(['click', 'touchdown'], key, function (event){
           keyPressed(event);

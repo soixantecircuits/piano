@@ -128,6 +128,12 @@ var piano = (function (k){
       input.value = insertToString(input.value, cursor, (diff - 1), ' ');
     } else if(/shift/i.test(target.className)){
       k.switchCase();
+    } else if(/larr/i.test(target.className)){
+      offset = -1;
+    } else if(/rarr/i.test(target.className)){
+      offset = 1;
+    } else if(/hide/i.test(target.className)){
+      k.hideKeyboard();
     } else {
       input.value = insertToString(input.value, cursor, (diff - 1), value);
     }

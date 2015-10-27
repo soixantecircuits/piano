@@ -161,7 +161,7 @@ var piano = (function (k){
 
   k.switchCase = function (){
     var shift = k.currentKeyboard.shift = !k.currentKeyboard.shift;
-    var keys = document.querySelectorAll('#piano-list li');
+    var keys = document.querySelectorAll('.piano-rows > ul > li');
     var layout = k.layouts[k.currentKeyboard.settings.layout];
 
     for (var i = 0; i < keys.length; i++) {

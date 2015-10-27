@@ -156,6 +156,15 @@ var piano = (function (k){
 
     input.selectionStart = cursor + offset;
     input.selectionEnd = cursor + offset;
+
+    if (document.createEvent) {
+      var evt = document.createEvent('HTMLEvents');
+      evt.initEvent('input', false, true);
+      input.dispatchEvent(evt);
+    } else {
+      input.fireEvent('oninput');
+    }
+
     input.focus();
   }
 

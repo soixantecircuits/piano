@@ -17,7 +17,7 @@ var piano = (function (k){
     k.container.id = 'piano';
     k.container.className = "piano-container";
 
-    k.triggers = document.querySelectorAll('input[data-piano]');
+    k.triggers = document.querySelectorAll('[data-piano]');
     for (var i = 0; i < k.triggers.length; i++) {
       createKeyboard(k, k.triggers[i]);
     }

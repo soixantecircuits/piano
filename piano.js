@@ -93,8 +93,8 @@ var piano = (function (k){
         if(typeof(layout[i][0]) == 'object'){
           li.className = layout[i][0].name;
           key.className = 'key ' + layout[i][0].name;
-          key.textContent = layout[i][0].value;
-          key.dataset.pianoKey = layout[i][0].value;
+          key.innerHTML = layout[i][0].value;
+          key.dataset.pianoKey = layout[i][0].name;
         } else {
           key.className = 'key ' + layout[i];
           key.textContent = layout[i][0];

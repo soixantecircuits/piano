@@ -72,6 +72,9 @@
 .piano-container ul li .key:focus {
   outline: none;
 }
+.piano-container ul li.del {
+  width: 100px;
+}
 .piano-container ul li.space {
   width: 200px;
 }

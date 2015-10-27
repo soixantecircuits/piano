@@ -74,19 +74,24 @@ var piano = (function (k){
   }
 
   function displayKeyboard (instance){
-    var list = document.createElement('ul');
-    list.id = 'piano-list';
+    var rowsContainer = document.createElement('div');
+    rowsContainer.className = 'piano-rows';
     k.currentKeyboard = instance;
 
     var layout = k.layouts[instance.settings.layout];
 
+    var rows = [];
+    rows.push(document.createElement('ul'));
+
     for(var i in layout){
       var li = document.createElement('li');
       if(layout[i] == 'break'){
-        li.className = 'break';
+        rowsContainer.appendChild(rows[rows.length - 1]);
+        rows.push(document.createElement('ul'));
       } else {
         var key = document.createElement('button');
         if(typeof(layout[i][0]) == 'object'){
+          li.className = layout[i][0].name;
           key.className = 'key ' + layout[i][0].name;
           key.textContent = layout[i][0].value;
           key.dataset.pianoKey = layout[i][0].value;
@@ -98,10 +103,10 @@ var piano = (function (k){
         addMultipleListeners(['click', 'touchdown'], key, function (event){
           keyPressed(event);
         });
-        li.appendChild(key)
+        li.appendChild(key);
       }
 
-      list.appendChild(li);
+      rows[rows.length - 1].appendChild(li);
     }
 
     if(isNaN(instance.settings.position.x) || isNaN(instance.settings.position.y)){
@@ -112,7 +117,7 @@ var piano = (function (k){
       k.container.style.top = instance.settings.position.y + 'px';
     }
 
-    k.container.appendChild(list);
+    k.container.appendChild(rowsContainer);
   }
 
   function keyPressed (event){

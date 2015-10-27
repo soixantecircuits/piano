@@ -1,3 +1,4 @@
+// TODO: comment and organize this stylesheet
 .piano-container {
   margin: 0;
   padding: 0;
@@ -24,22 +25,33 @@
 .piano-container.bottom {
   bottom: 0;
 }
+.piano-container .piano-rows {
+  background: rgba(0, 0, 0, .9);
+  padding: 1em 0;
+}
 .piano-container ul {
   margin: auto;
   padding: .25em 0;
   max-width: 1080px;
   min-width: 340px;
   text-align: center;
-  background: rgba(0, 0, 0, .9);
+  user-select: none;
+  -o-user-select:none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
 }
 .piano-container ul li {
-  display: inline;
-}
-.piano-container ul li .key {
-  margin: .2em;
+  display: inline-block;
   padding: 0;
   height: 3em;
-  width: 3.5em;
+  width: 50px;
+  padding: 0 .2em;
+  vertical-align: middle;
+}
+.piano-container ul li .key {
+  height: 100%;
+  width: 100%;
   background: #2F2E34;
   color: #FFF;
   font-size: 1em;
@@ -59,19 +71,15 @@
 .piano-container ul li .key:focus {
   outline: none;
 }
-.piano-container ul li.break:after {
-  content: "\A";
-  white-space: pre;
-}
-.piano-container ul li .space {
-  padding: .3em 12.5em;
+.piano-container ul li.space {
+  width: 200px;
 }
 .piano-container ul li .key:active:after {
   content: attr(data-piano-key);
   display: inline-block;
   position: absolute;
   bottom: 4em;
-  left: -.2em;
+  left: -.4em;
   height: 3.5em;
   width: 4em;
   line-height: 3.3em;

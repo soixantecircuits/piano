@@ -105,6 +105,7 @@ var piano = (function (k){
         });
         li.appendChild(key);
       }
+      rowsContainer.appendChild(rows[rows.length - 1]);
 
       rows[rows.length - 1].appendChild(li);
     }

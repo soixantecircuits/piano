@@ -59,7 +59,7 @@ var piano = (function (k){
         y: options.position[1] || 'bottom'
       },
       layout: options.layout || 'default',
-      limit: options.limit || 0
+      limit: options.limit || -1
     }
 
     addMultipleListeners(['click', 'touchdown'], target, function (event){
@@ -123,6 +123,7 @@ var piano = (function (k){
     var end = input.selectionEnd;
     var diff = (end - cursor) || 1;
     var offset = 1;
+    var limit =  k.currentKeyboard.settings.limit;
 
     // There are still small bugs with selections.
     if(/del/i.test(target.className)){
@@ -130,7 +131,7 @@ var piano = (function (k){
       input.value = insertToString(input.value, (cursor + deleteOffset), diff, '');
       offset = -1;
     } else if(/space/i.test(target.className)){
-      if(input.value.length <= k.currentKeyboard.settings.limit){
+      if(input.value.length <= limit || limit == -1){
         input.value = insertToString(input.value, cursor, (diff - 1), ' ');
       }
     } else if(/shift/i.test(target.className)){
@@ -142,7 +143,7 @@ var piano = (function (k){
     } else if(/hide/i.test(target.className)){
       k.hideKeyboard();
     } else {
-      if(input.value.length <= k.currentKeyboard.settings.limit){
+      if(input.value.length <= limit || limit == -1){
         input.value = insertToString(input.value, cursor, (diff - 1), value);
       }
     }

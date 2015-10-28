@@ -15,7 +15,7 @@ var piano = (function (k){
   k.init = function (){
     k.container = document.createElement('div');
     k.container.id = 'piano';
-    k.container.className = "piano-container";
+    k.container.className = 'piano-container animated';
 
     k.triggers = document.querySelectorAll('[data-piano]');
     for (var i = 0; i < k.triggers.length; i++) {
@@ -52,6 +52,8 @@ var piano = (function (k){
     }
     options.layout = datas.pianoLayout;
     options.limit = datas.pianoLimit;
+    options.animationIn = datas.pianoAnimationIn;
+    options.animationOut = datas.pianoAnimationOut;
 
     var eventID = datas.pianoEventId;
     var elementEvent = null;
@@ -67,24 +69,23 @@ var piano = (function (k){
       },
       layout: options.layout || 'default',
       limit: options.limit || -1,
-      submitEvent: elementEvent
+      submitEvent: elementEvent,
+      animationIn: options.animationIn || 'fadeInUp',
+      animationOut: options.animationOut || 'fadeOutDown'
     }
 
     addMultipleListeners(['click', 'touchdown'], target, function (event){
-      triggerHandler(event);
-    });
-
-    function triggerHandler (event){
+      k.clearKeyboards();
       k.currentTarget = event.target;
-      k.hideKeyboard();
       displayKeyboard(_k);
-    }
+    });
   }
 
   function displayKeyboard (instance){
+    k.currentKeyboard = instance;
+
     var rowsContainer = document.createElement('div');
     rowsContainer.className = 'piano-rows';
-    k.currentKeyboard = instance;
 
     var layout = k.layouts[instance.settings.layout];
 
@@ -126,7 +127,11 @@ var piano = (function (k){
       k.container.style.top = instance.settings.position.y + 'px';
     }
 
-    k.container.appendChild(rowsContainer);
+    setTimeout(function () {
+      k.container.classList.remove(k.currentKeyboard.settings.animationOut);
+      k.container.appendChild(rowsContainer);
+      k.container.classList.add(k.currentKeyboard.settings.animationIn);
+    }, 0);
   }
 
   function keyPressed (event){
@@ -177,7 +182,7 @@ var piano = (function (k){
       evt.initEvent('input', false, true);
       input.dispatchEvent(evt);
     } else {
-      input.fireEvent('oninput');
+      input.fireEvent('input');
     }
 
     input.focus();
@@ -203,9 +208,16 @@ var piano = (function (k){
 
   k.hideKeyboard = function (){
     if(k.container.firstChild){
+      k.container.classList.remove(k.currentKeyboard.settings.animationIn);
+      k.container.classList.add(k.currentKeyboard.settings.animationOut);
+    }
+  }
+
+  k.clearKeyboards = function (){
+    if(k.container.firstChild){
       k.container.firstChild.remove();
       k.container.style.top = k.container.style.left = '';
-      k.container.className = "piano-container";
+      k.container.className = 'piano-container animated';
       k.currentKeyboard = null;
     }
   }

@@ -56,6 +56,14 @@ element.addEventListener('input-event', function (event){
 });
 ```
 
+## Animations
+
+Piano provide has built-in but yet optionnal support for [Animate.css](https://daneden.github.io/animate.css/).
+
+By default, it will add `fadeInUp` and `fadeOutDown` classes to your container. Just load the animate.css stylesheet and you'll have nice animations. You can also use the `data-piano-animation-in` and `data-piano-animation-out` attributes to define custom classes to toggle on hide/show.
+
+You can also choose to create your own animations, and thus just use the classes toggled by piano to trigger them.
+
 ## Layouts
 
 *Soon.*

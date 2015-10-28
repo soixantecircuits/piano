@@ -1,6 +1,6 @@
 # Piano ⌨
 
-#### Modular keyboard written in pure JavaScript.
+#### Customizable virtual keyboard written in pure JavaScript.
 
 [![Join the chat at https://gitter.im/soixantecircuits/piano](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/soixantecircuits/piano?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -23,7 +23,7 @@ Then, add the `data-piano` attribute to trigger the keyboard on click/touch.
 
 Make sure you have `node`, `npm` and `gulp` installed. After you have installed development dependencies with `npm i`, you can run `gulp serve` and go to `http://localhost:8080/demo` to check a demo.
 
-# Positionning / styling
+## Positionning / styling
 
 You can define positionning with the `data-piano-position` attribute. You can use the following:
 
@@ -45,7 +45,18 @@ Or, with the `absolute` keyword, you can define absolute x and y positions:
 
 Default positions are `'center, bottom'`.
 
-# Layouts
+## Submit
+
+You can define a `data-piano-event-id` attribute on your element and then listen to it.
+For example, if you have a `data-piano-event-id="input-event"`:
+
+```
+element.addEventListener('input-event', function (event){
+  console.log('element with id "%s" submitted.', event.target.id);
+});
+```
+
+## Layouts
 
 *Soon.*
 
@@ -55,11 +66,9 @@ Just clone the repository and you'll be good to go.
 
 # To Do
 
-- Support accentuation.
-- Add nice style and animation.
-- Make sure keys are still visible when someone has its finger on it (cf. Android/iOS keyboards).
+- Support accentuation. (partial support for now).
 - Support hammer.js and/or other touch events librarie.
-- Make sure it works well with requireJS, AngularJS, MetoarJS, React.
+- Make sure it works well with ~~requireJS~~, AngularJS, MeteorJS, React.
 - Publish it to bower and be famous.
 - Test with IE11, Chrome, Firefox.
-- Test embeded in electron and nwjs.
+- Test embeded in ~~electron~~ and nwjs.

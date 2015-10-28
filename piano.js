@@ -53,13 +53,21 @@ var piano = (function (k){
     options.layout = datas.pianoLayout;
     options.limit = datas.pianoLimit;
 
+    var eventID = datas.pianoEventId;
+    var elementEvent = null;
+    if(eventID){
+      elementEvent = document.createEvent('Event');
+      elementEvent.initEvent(eventID, true, true);
+    }
+
     _k.settings = {
       position: {
         x: options.position[0] || 'center',
         y: options.position[1] || 'bottom'
       },
       layout: options.layout || 'default',
-      limit: options.limit || -1
+      limit: options.limit || -1,
+      submitEvent: elementEvent
     }
 
     addMultipleListeners(['click', 'touchdown'], target, function (event){
@@ -130,6 +138,7 @@ var piano = (function (k){
     var diff = (end - cursor) || 1;
     var offset = 1;
     var limit =  k.currentKeyboard.settings.limit;
+    var submitEvent = k.currentKeyboard.settings.submitEvent;
 
     // There are still small bugs with selections.
     if(/del/i.test(target.className)){
@@ -148,6 +157,12 @@ var piano = (function (k){
       offset = 1;
     } else if(/hide/i.test(target.className)){
       k.hideKeyboard();
+    } else if(/submit/i.test(target.className)){
+      if(submitEvent){
+        input.dispatchEvent(submitEvent);
+      } else {
+        console.warn('You did not provide a data-piano-event-id attribute.')
+      }
     } else {
       if(input.value.length <= limit || limit == -1){
         input.value = insertToString(input.value, cursor, (diff - 1), value);

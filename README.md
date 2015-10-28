@@ -23,6 +23,8 @@ Then, add the `data-piano` attribute to trigger the keyboard on click/touch.
 
 Make sure you have `node`, `npm` and `gulp` installed. After you have installed development dependencies with `npm i`, you can run `gulp serve` and go to `http://localhost:8080/demo` to check a demo.
 
+Or you can check it out [here](soixantecircuits.github.io/piano).
+
 ## Positionning / styling
 
 You can define positionning with the `data-piano-position` attribute. You can use the following:

@@ -16,6 +16,6 @@
     ['a'], ['z'], ['e'], ['r'], ['t'], ['y'], ['u'], ['i'], ['o'], ['p'], ['^'], ['$', '*'], ['break'],
     ['q'],['s'],['d'],['f'],['g'],['h'],['j'],['k'],['l'],['m'],['ù', '%'],['break'],
     [{name: 'shift', value: '&123'}], ['w'], ['x'], ['c'], ['v'], ['b'], ['n'], [',', '?'], ['.', ';'], ['/', ':'], ['=', '+'], [{name: 'shift', value: '↑'}], ['break'],
-    [{name: 'larr', value: '&lsaquo;'}], [{name: 'space', value: ' '}], [{name: 'rarr', value: '&rsaquo;'}], [{name: 'hide', value: '&DownTeeArrow;'}], [{name: 'submit', value: '&ldsh;'}]
+    [{name: 'larr', value: '&lsaquo;'}], [{name: 'space', value: ' '}], [{name: 'rarr', value: '&rsaquo;'}], [{name: 'hide', value: '&times;'}], [{name: 'submit', value: '&ldsh;'}]
   ];
 })(piano || {});

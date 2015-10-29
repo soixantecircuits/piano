@@ -128,11 +128,9 @@ var piano = (function (k){
       k.container.style.top = instance.settings.position.y + 'px';
     }
 
-    setTimeout(function () {
-      k.container.classList.remove(k.currentKeyboard.settings.animationOut);
-      k.container.appendChild(rowsContainer);
-      k.container.classList.add(k.currentKeyboard.settings.animationIn);
-    }, 0);
+    k.container.classList.remove(k.currentKeyboard.settings.animationOut);
+    k.container.appendChild(rowsContainer);
+    k.container.classList.add(k.currentKeyboard.settings.animationIn);
   }
 
   function keyPressed (event){

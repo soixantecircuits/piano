@@ -12,10 +12,11 @@ var piano = (function (k){
 
   var k = {};
 
-  k.init = function (){
+  k.init = function (triggerName){
     k.container = document.createElement('div');
     k.container.id = 'piano';
     k.container.className = 'piano-container animated';
+    k.triggerName = triggerName || 'click';
 
     k.triggers = document.querySelectorAll('[data-piano]');
     for (var i = 0; i < k.triggers.length; i++) {
@@ -109,7 +110,7 @@ var piano = (function (k){
           key.textContent = layout[i][0];
           key.dataset.pianoKey = layout[i][0];
         }
-        addMultipleListeners(['click', 'touchdown'], key, function (event){
+        addMultipleListeners(k.triggerName, key, function (event){
           keyPressed(event);
         });
         li.appendChild(key);
@@ -228,6 +229,7 @@ var piano = (function (k){
   }
 
   function addMultipleListeners (events, target, handler){
+    events = (events instanceof Array) ? events : [events];
     for (var i = 0; i < events.length; i++) {
       target.addEventListener(events[i], function (event){
         handler(event);

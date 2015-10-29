@@ -1,5 +1,6 @@
 (function (){
-  piano.init();
+  piano.init('touchstart');
+
   document.querySelector('#input-2').click();
 
   document.querySelector('#input-2').addEventListener('input', function (event){

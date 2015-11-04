@@ -131,6 +131,7 @@ var piano = (function (k){
     k.container.classList.remove(k.currentKeyboard.settings.animationOut);
     k.container.appendChild(rowsContainer);
     k.container.classList.add(k.currentKeyboard.settings.animationIn);
+    document.body.classList.add('piano-open');
   }
 
   function keyPressed (event){
@@ -209,6 +210,7 @@ var piano = (function (k){
     if(k.container.firstChild){
       k.container.classList.remove(k.currentKeyboard.settings.animationIn);
       k.container.classList.add(k.currentKeyboard.settings.animationOut);
+      document.body.classList.remove('piano-open');
     }
   }
 

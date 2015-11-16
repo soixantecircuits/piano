@@ -30,7 +30,7 @@ var piano = (function (k){
         k.hideKeyboard();
       }
     });
-  }
+  };
 
   function createKeyboard (parent, target){
     var _k = clone(parent);
@@ -80,10 +80,11 @@ var piano = (function (k){
       k.currentTarget = event.target;
       displayKeyboard(_k);
     });
-  }
+  };
 
   function displayKeyboard (instance){
-    k.currentKeyboard = instance;
+    var _k = k;
+    _k.currentKeyboard = instance;
 
     var rowsContainer = document.createElement('div');
     rowsContainer.className = 'piano-rows';
@@ -110,8 +111,8 @@ var piano = (function (k){
           key.textContent = layout[i][0];
           key.dataset.pianoKey = layout[i][0];
         }
-        addMultipleListeners(k.triggerName, key, function (event){
-          keyPressed(event);
+        addMultipleListeners(_k.triggerName, key, function (event){
+          _k.debounce(keyPressed(event), 300, false);
         });
         li.appendChild(key);
       }
@@ -132,7 +133,7 @@ var piano = (function (k){
     k.container.appendChild(rowsContainer);
     k.container.classList.add(k.currentKeyboard.settings.animationIn);
     document.body.classList.add('piano-open');
-  }
+  };
 
   function keyPressed (event){
     var target = event.target;
@@ -186,7 +187,7 @@ var piano = (function (k){
     }
 
     input.focus();
-  }
+  };
 
   k.switchCase = function (){
     var shift = k.currentKeyboard.shift = !k.currentKeyboard.shift;
@@ -204,7 +205,7 @@ var piano = (function (k){
         }
       }
     }
-  }
+  };
 
   k.hideKeyboard = function (){
     if(k.container.firstChild){
@@ -212,7 +213,7 @@ var piano = (function (k){
       k.container.classList.add(k.currentKeyboard.settings.animationOut);
       document.body.classList.remove('piano-open');
     }
-  }
+  };
 
   k.clearKeyboards = function (){
     if(k.container.firstChild){
@@ -221,12 +222,12 @@ var piano = (function (k){
       k.container.className = 'piano-container animated';
       k.currentKeyboard = null;
     }
-  }
+  };
 
   // Found on http://stackoverflow.com/a/21350614/2033455
   function insertToString (str, index, count, add){
     return str.slice(0, index) + (add || "") + str.slice(index + count);
-  }
+  };
 
   function addMultipleListeners (events, target, handler){
     events = (events instanceof Array) ? events : [events];
@@ -235,7 +236,7 @@ var piano = (function (k){
         handler(event);
       });
     }
-  }
+  };
 
   function clone (src){
     var dest = {};
@@ -243,7 +244,28 @@ var piano = (function (k){
       dest[key] = src[key];
     }
     return dest;
-  }
+  };
+
+  // Helpers function for piano object
+  k.debounce = function(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this,
+        args = arguments;
+      var later = function() {
+        timeout = null;
+        if ( !immediate ) {
+          func.apply(context, args);
+        }
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait || 200);
+      if ( callNow ) { 
+        func.apply(context, args);
+      }
+    };
+  };
 
   return k;
 })(piano || {});

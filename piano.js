@@ -12,11 +12,12 @@ var piano = (function (k){
 
   var k = {};
 
-  k.init = function (triggerName){
+  k.init = function (options){
     k.container = document.createElement('div');
     k.container.id = 'piano';
     k.container.className = 'piano-container animated';
-    k.triggerName = triggerName || 'click';
+    console.log(options.triggers);
+    k.triggerName = options.triggers || 'click';
 
     k.triggers = document.querySelectorAll('[data-piano]');
     for (var i = 0; i < k.triggers.length; i++) {

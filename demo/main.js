@@ -1,5 +1,7 @@
 (function (){
-  piano.init();
+  piano.init({
+    triggers: ['click', 'touchstart']
+  });
 
   document.querySelector('#input-2').click();
 

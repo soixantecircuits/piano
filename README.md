@@ -72,6 +72,10 @@ Piano's support for tactile events is still in development (I know, for a virtua
 
 This will be optimized very soon. If you have any ideas, suggestions, or even want to get your hands dirty hand submit a PR, you are more than welcome !
 
+# Options 
+You can pass options to your `piano.init()` call. Here they are:
+- trigger: **Array** of event triggers you want Piano to react
+
 ## Layouts
 
 *Soon.*

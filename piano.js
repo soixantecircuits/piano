@@ -55,6 +55,7 @@ var piano = (function (k){
     options.limit = datas.pianoLimit;
     options.animationIn = datas.pianoAnimationIn;
     options.animationOut = datas.pianoAnimationOut;
+    options.scale = datas.pianoScale;
 
     var eventID = datas.pianoEventId;
     var elementEvent = null;
@@ -72,7 +73,8 @@ var piano = (function (k){
       limit: options.limit || -1,
       submitEvent: elementEvent,
       animationIn: options.animationIn || 'fadeInUp',
-      animationOut: options.animationOut || 'fadeOutDown'
+      animationOut: options.animationOut || 'fadeOutDown',
+      scale: options.scale || 1
     }
 
     addMultipleListeners(['click', 'touchdown'], target, function (event){
@@ -132,6 +134,14 @@ var piano = (function (k){
     k.container.classList.remove(k.currentKeyboard.settings.animationOut);
     k.container.appendChild(rowsContainer);
     k.container.classList.add(k.currentKeyboard.settings.animationIn);
+
+    k.container.querySelector('.piano-rows').style['-webkit-transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
+    k.container.querySelector('.piano-rows').style['-moz-transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
+    k.container.querySelector('.piano-rows').style['-ms-transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
+    k.container.querySelector('.piano-rows').style['-o-transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
+    k.container.querySelector('.piano-rows').style['transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
+
+
     document.body.classList.add('piano-open');
   };
 

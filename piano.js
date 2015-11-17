@@ -14,19 +14,17 @@ var piano = (function (k){
 
   k.init = function (options){
     if(document.querySelectorAll('#piano').length){
-      return;
+      return false;
     }
+
+    options = options || {};
 
     k.container = document.createElement('div');
     k.container.id = 'piano';
     k.container.className = 'piano-container animated';
 
     k.triggerName = options.triggers || 'click';
-
-    k.triggers = document.querySelectorAll('[data-piano]');
-    for (var i = 0; i < k.triggers.length; i++) {
-      createKeyboard(k, k.triggers[i]);
-    }
+    k.detectInputs();
     document.body.appendChild(k.container);
 
     // Make sure to hide keyboard when clicking outside
@@ -35,7 +33,16 @@ var piano = (function (k){
         k.hideKeyboard();
       }
     });
+
+    return k;
   };
+
+  k.detectInputs = function(){
+    k.triggers = document.querySelectorAll('[data-piano]');
+    for (var i = 0; i < k.triggers.length; i++) {
+      createKeyboard(k, k.triggers[i]);
+    }
+  }
 
   function createKeyboard (parent, target){
     var _k = clone(parent);
@@ -141,7 +148,6 @@ var piano = (function (k){
     k.container.classList.add(k.currentKeyboard.settings.animationIn);
 
     var scale = _k.currentKeyboard.settings.scale;
-    console.log(scale);
     if(scale > 1){
       var x = _k.currentKeyboard.settings.position.x;
       var y = _k.currentKeyboard.settings.position.y;

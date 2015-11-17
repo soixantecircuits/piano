@@ -94,6 +94,9 @@
   width: 50px;
   height: 50px;
 }
+.piano-container ul .hide {
+  display: inherit !important;
+}
 .piano-container ul li .key:active:after {
   content: attr(data-piano-key);
   display: inline-block;

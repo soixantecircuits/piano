@@ -42,6 +42,7 @@ var piano = (function (k){
     for (var i = 0; i < k.triggers.length; i++) {
       createKeyboard(k, k.triggers[i]);
     }
+    return k;
   }
 
   function createKeyboard (parent, target){

@@ -13,10 +13,14 @@ var piano = (function (k){
   var k = {};
 
   k.init = function (options){
+    if(document.querySelectorAll('#piano').length){
+      return;
+    }
+
     k.container = document.createElement('div');
     k.container.id = 'piano';
     k.container.className = 'piano-container animated';
-    console.log(options.triggers);
+
     k.triggerName = options.triggers || 'click';
 
     k.triggers = document.querySelectorAll('[data-piano]');

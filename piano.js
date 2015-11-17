@@ -115,7 +115,7 @@ var piano = (function (k){
           key.dataset.pianoKey = layout[i][0];
         }
         addMultipleListeners(_k.triggerName, key, function (event){
-          _k.debounce(keyPressed(event), 300, false);
+          debounce(keyPressed(event), 300, false);
         });
         li.appendChild(key);
       }
@@ -273,7 +273,7 @@ var piano = (function (k){
   };
 
   // Helpers function for piano object
-  k.debounce = function(func, wait, immediate) {
+  function debounce (func, wait, immediate) {
     var timeout;
     return function() {
       var context = this,

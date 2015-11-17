@@ -136,15 +136,30 @@ var piano = (function (k){
     k.container.appendChild(rowsContainer);
     k.container.classList.add(k.currentKeyboard.settings.animationIn);
 
-    k.container.querySelector('.piano-rows').style['-webkit-transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
-    k.container.querySelector('.piano-rows').style['-moz-transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
-    k.container.querySelector('.piano-rows').style['-ms-transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
-    k.container.querySelector('.piano-rows').style['-o-transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
-    k.container.querySelector('.piano-rows').style['transform'] = 'scale('+_k.currentKeyboard.settings.scale+')';
-
+    var scale = _k.currentKeyboard.settings.scale;
+    console.log(scale);
+    if(scale > 1){
+      var x = _k.currentKeyboard.settings.position.x;
+      var y = _k.currentKeyboard.settings.position.y;
+      scaleKeyboard(rowsContainer, scale, x, y);
+    }
 
     document.body.classList.add('piano-open');
   };
+
+  function scaleKeyboard(container, scale, x, y){
+    container.style['-webkit-transform'] = 'scale(' + scale + ')';
+    container.style['-moz-transform'] = 'scale(' + scale + ')';
+    container.style['-ms-transform'] = 'scale(' + scale + ')';
+    container.style['-o-transform'] = 'scale(' + scale + ')';
+    container.style['transform'] = 'scale(' + scale + ')';
+
+    container.style['-webkit-transform-origin'] = x + ' ' + y ;
+    container.style['-moz-transform-origin'] = x + ' ' + y ;
+    container.style['-ms-transform-origin'] = x + ' ' + y ;
+    container.style['-o-transform-origin'] = x + ' ' + y ;
+    container.style['transform-origin'] = x + ' ' + y ;
+  }
 
   function keyPressed (event){
     var target = event.target;
@@ -272,7 +287,7 @@ var piano = (function (k){
       var callNow = immediate && !timeout;
       clearTimeout(timeout);
       timeout = setTimeout(later, wait || 200);
-      if ( callNow ) { 
+      if ( callNow ) {
         func.apply(context, args);
       }
     };

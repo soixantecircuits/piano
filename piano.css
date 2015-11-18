@@ -22,14 +22,20 @@
 .piano-container {
   margin: 0;
   padding: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
   max-width: 1080px;
   z-index: 999;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -khtml-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
 }
 .piano-container .piano-rows {
   background: #000;
   padding: 1em 0;
+  position: relative;
 }
 .piano-container ul {
   margin: auto;

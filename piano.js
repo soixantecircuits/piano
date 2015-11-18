@@ -24,6 +24,8 @@ var piano = (function (k){
     k.container.className = 'piano-container animated';
 
     k.triggerName = options.triggers || 'click';
+    k.slideContent = options.slideContent || false;
+    k.slideContainer = options.slideContainer || 'body';
     k.detectInputs();
     document.body.appendChild(k.container);
 
@@ -156,6 +158,9 @@ var piano = (function (k){
     }
 
     document.body.classList.add('piano-open');
+    if(k.slideContent){
+      document.querySelector(k.slideContainer).style.top = '-' + (k.container.offsetHeight / 2) + 'px';
+    }
   };
 
   function scaleKeyboard(container, scale, x, y){
@@ -249,6 +254,7 @@ var piano = (function (k){
       k.container.classList.remove(k.currentKeyboard.settings.animationIn);
       k.container.classList.add(k.currentKeyboard.settings.animationOut);
       document.body.classList.remove('piano-open');
+      document.querySelector(k.slideContainer).style.top = 0;
     }
   };
 
@@ -258,6 +264,7 @@ var piano = (function (k){
       k.container.style.top = k.container.style.left = '';
       k.container.className = 'piano-container animated';
       k.currentKeyboard = null;
+      document.querySelector(k.slideContainer).style.top = 0;
     }
   };
 

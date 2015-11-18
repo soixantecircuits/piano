@@ -159,7 +159,7 @@ var piano = (function (k){
 
     document.body.classList.add('piano-open');
     if(k.slideContent){
-      document.querySelector(k.slideContainer).style.top = '-' + (k.container.offsetHeight / 2) + 'px';
+      document.querySelector(k.slideContainer).style.top = '-' + (rowsContainer.getBoundingClientRect().height / 2) + 'px';
     }
   };
 

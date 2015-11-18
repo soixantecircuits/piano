@@ -48,6 +48,11 @@
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 0;
 }
 .piano-container ul li {
   display: inline-block;
@@ -56,6 +61,9 @@
   width: 50px;
   padding: 0 .2em;
   vertical-align: middle;
+}
+.piano-container ul li:empty {
+  display: none;
 }
 .piano-container ul li .key {
   height: 100%;

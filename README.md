@@ -2,6 +2,7 @@
 
 #### Customizable virtual keyboard written in pure JavaScript.
 
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Join the chat at https://gitter.im/soixantecircuits/piano](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/soixantecircuits/piano?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 *Piano is still under active development.*
@@ -72,7 +73,7 @@ Piano's support for tactile events is still in development (I know, for a virtua
 
 This will be optimized very soon. If you have any ideas, suggestions, or even want to get your hands dirty hand submit a PR, you are more than welcome !
 
-# Options 
+# Options
 You can pass options to your `piano.init()` call. Here they are:
 - trigger: **Array** of event triggers you want Piano to react
 
@@ -82,7 +83,7 @@ You can pass options to your `piano.init()` call. Here they are:
 
 # Development
 
-Just clone the repository and you'll be good to go.
+Create a `feature-[name-of-the-feature]` branch and make PR on the `dev` branch. Please use the [standard js coding style](https://github.com/feross/standard).
 
 # To Do
 

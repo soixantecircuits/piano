@@ -181,8 +181,12 @@ var piano = (function (k) {
     var target = event.target
     var value = target.textContent
     var input = k.currentTarget
-    var cursor = input.selectionStart
-    var end = input.selectionEnd
+    var cursor = null
+    var end = null
+    if (input.type !== 'email') {
+      cursor = input.selectionStart
+      end = input.selectionEnd
+    }
     var diff = (end - cursor) || 1
     var offset = 1
     var limit = k.currentKeyboard.settings.limit
@@ -217,8 +221,10 @@ var piano = (function (k) {
       }
     }
 
-    input.selectionStart = cursor + offset
-    input.selectionEnd = cursor + offset
+    if (input.type !== 'email') {
+      input.selectionStart = cursor + offset
+      input.selectionEnd = cursor + offset
+    }
 
     if (document.createEvent) {
       var evt = document.createEvent('HTMLEvents')

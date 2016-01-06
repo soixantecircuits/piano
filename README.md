@@ -18,7 +18,7 @@ Download [piano](piano.js) and at least the [default layout](layouts/default.js)
   <script src="path/to/layouts/default.js"></script>
 ```
 
-Then, add the `data-piano` attribute to trigger the keyboard on click/touch and call `piano.init();` in your js.
+Then, add the `data-piano` attribute to trigger the keyboard on click/touch and call `piano.init()` in your js.
 
 #### Demo
 
@@ -53,10 +53,10 @@ Default positions are `'center, bottom'`.
 You can define a `data-piano-event-id` attribute on your element and then listen to it.
 For example, if you have a `data-piano-event-id="input-event"`:
 
-```
-element.addEventListener('input-event', function (event){
-  console.log('element with id "%s" submitted.', event.target.id);
-});
+```javascript
+element.addEventListener('input-event', function (event) {
+  console.log('element with id "%s" submitted.', event.target.id)
+})
 ```
 
 ## Animations
@@ -69,7 +69,7 @@ You can also choose to create your own animations, and thus just use the classes
 
 ## Tactile events
 
-Piano's support for tactile events is still in development (I know, for a virtual keyboard destined to touchscreens, it's kinda lame ...). However, it should work (though not ideally and efficiently) with the browser emulation of the `click` event on touchscreens. You can also define your own event to listen to in the initialization : `piano.init('touchstart');` for example (default is `'click'`).
+Piano's support for tactile events is still in development (I know, for a virtual keyboard destined to touchscreens, it's kinda lame ...). However, it should work (though not ideally and efficiently) with the browser emulation of the `click` event on touchscreens. You can also define your own event to listen to in the initialization : `piano.init('touchstart')` for example (default is `'click'`).
 
 This will be optimized very soon. If you have any ideas, suggestions, or even want to get your hands dirty hand submit a PR, you are more than welcome !
 

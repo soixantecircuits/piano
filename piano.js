@@ -268,6 +268,11 @@ var piano = (function (k) {
     }
   }
 
+  k.destroy = function () {
+    k.clearKeyboards()
+    k.container.remove()
+  }
+
   // Found on http://stackoverflow.com/a/21350614/2033455
   function insertToString (str, index, count, add) {
     return str.slice(0, index) + (add || '') + str.slice(index + count)

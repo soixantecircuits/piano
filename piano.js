@@ -272,6 +272,10 @@ var piano = (function (k) {
       document.querySelector(k.slideContainer).style.top = 0
     }
   }
+  
+  k.isOpen = function(){
+    return document.body.className.match(/\piano-open\b/) !== null 
+  }
 
   k.destroy = function () {
     k.clearKeyboards()

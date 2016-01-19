@@ -20,6 +20,24 @@ Download [piano](piano.js) and at least the [default layout](layouts/default.js)
 
 Then, add the `data-piano` attribute to trigger the keyboard on click/touch and call `piano.init()` in your js.
 
+A basic `init()` looks like this:
+
+```
+piano.init({
+  triggers: ['click', 'touchstart'],
+  slideContent: true,
+  slideContainer: '.demo-container',
+  onHidden: function () {
+    console.log("hidden")
+  },
+  onBeforeHidden: function () {
+    console.log("hidding...")
+  }
+})
+```
+
+See the demo for more information.
+
 #### Demo
 
 Make sure you have `node`, `npm` and `gulp` installed. After you have installed development dependencies with `npm i`, you can run `gulp serve` and go to `http://localhost:8080/demo` to check a demo.
@@ -76,6 +94,10 @@ This will be optimized very soon. If you have any ideas, suggestions, or even wa
 # Options
 You can pass options to your `piano.init()` call. Here they are:
 - trigger: **Array** of event triggers you want Piano to react
+- slideContent: **bool** [true, false], _default to false_. Allow to define if the content should _slide_
+- slideContainer: **string** ['.demo-container'], _no default_. Allow to define the part of the DOM you want to _slide_
+- onHidden: **function**, _default to empty function_. Allow to call a function when the keyboard is hidden
+- onBeforeHidden: **function**, _default to empty function_. Allow to call a function before the keyboard is hidden
 
 ## Layouts
 

@@ -4,7 +4,13 @@
   piano.init({
     triggers: ['click', 'touchstart'],
     slideContent: true,
-    slideContainer: '.demo-container'
+    slideContainer: '.demo-container',
+    onHidden: function () {
+      console.log("hidden")
+    },
+    onBeforeHidden: function () {
+      console.log("hidding...")
+    }
   })
 
   document.querySelector('textarea').click()

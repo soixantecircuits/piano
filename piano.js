@@ -16,7 +16,7 @@ var piano = (function (k) {
     if (document.querySelectorAll('#piano').length) {
       return false
     }
-
+    
     options = options || {}
 
     k.container = document.createElement('div')
@@ -35,6 +35,9 @@ var piano = (function (k) {
         k.hideKeyboard()
       }
     })
+
+    k.onHidden = options.onHidden || function () {}
+    k.onBeforeHidden = options.onBeforeHidden || function () {}
 
     return k
   }
@@ -251,10 +254,12 @@ var piano = (function (k) {
 
   k.hideKeyboard = function () {
     if (k.container.firstChild) {
+      typeof k.onBeforeHidden === 'function' && k.onBeforeHidden()
       k.container.classList.remove(k.currentKeyboard.settings.animationIn)
       k.container.classList.add(k.currentKeyboard.settings.animationOut)
       document.body.classList.remove('piano-open')
       document.querySelector(k.slideContainer).style.top = 0
+      typeof k.onHidden === 'function' && k.onHidden()
     }
   }
 

@@ -269,6 +269,7 @@ var piano = (function (k) {
       k.container.style.top = k.container.style.left = ''
       k.container.className = 'piano-container animated'
       k.currentKeyboard = null
+      document.body.classList.remove('piano-open')
       document.querySelector(k.slideContainer).style.top = 0
     }
   }

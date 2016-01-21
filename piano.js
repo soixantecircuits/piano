@@ -14,6 +14,7 @@ var piano = (function (k) {
 
   k.init = function (options) {
     if (document.querySelectorAll('#piano').length) {
+      console.warn('piano is already initialized')
       return false
     }
     

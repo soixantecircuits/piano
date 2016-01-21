@@ -1,5 +1,5 @@
 keyboard = new piano({
-  triggers: ['click', 'touchstart'],
+  triggerEvent: ['click', 'touchstart'],
   slideContent: true,
   slideContainer: '.demo-container',
   onHidden: function () {

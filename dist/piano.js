@@ -73,13 +73,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return false;
 	    }
 	    this.defaults = {
-	      triggerName: 'click',
+	      triggerEvents: ['click'],
 	      slideContent: false,
 	      slideContainer: 'body',
 	      onBeforeHidden: function onBeforeHidden() {},
 	      onHidden: function onHidden() {},
 	      layouts: layouts || []
 	    };
+	
 	    this.settings = _extends(this.defaults, options);
 	    this.container = _extends(document.createElement('div'), { id: 'piano', className: 'piano-container animated' });
 	    this.detectInputs();
@@ -189,9 +190,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            key.textContent = layout[i][0];
 	            key.dataset.pianoKey = layout[i][0];
 	          }
-	          addMultipleListeners(_k.triggerName, key, function (event) {
-	            debounce(keyPressed(event), 300, false);
-	          });
+	          addMultipleListeners(_k.settings.triggerEvents, key, function (event) {
+	            debounce(this.keyPressed(event), 300, false);
+	          }.bind(this));
 	          li.appendChild(key);
 	        }
 	        rowsContainer.appendChild(rows[rows.length - 1]);
@@ -320,6 +321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.container.style.top = this.container.style.left = '';
 	        this.container.className = 'piano-container animated';
 	        this.currentKeyboard = null;
+	        document.body.classList.remove('piano-open');
 	        if (this.slideContent) {
 	          document.querySelector(this.slideContainer).style.top = 0;
 	        }

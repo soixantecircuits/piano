@@ -2,7 +2,7 @@
   "name": "piano",
   "version": "0.0.1",
   "description": "Customizable virtual keyboard written in pure ES6",
-  "main": "dist/piano.js",
+  "main": "./dist/piano.js",
   "style": "piano.css",
   "scripts": {
     "test": "gulp",
@@ -11,7 +11,7 @@
     "watch": "gulp watch",
     "build": "gulp build",
     "coverage": "gulp coverage",
-    "dev":"budo --live"
+    "dev": "budo --live"
   },
   "repository": {
     "type": "git",
@@ -52,6 +52,7 @@
     "isparta": "^4.0.0",
     "json-loader": "^0.5.3",
     "mocha": "^2.3.4",
+    "script-loader": "^0.6.1",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
     "vinyl-source-stream": "^1.1.0",

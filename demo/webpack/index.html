@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Piano demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../animate.css">
+  <link rel="stylesheet" type="text/css" href="../../piano.css">
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      overflow: hidden;
+      font-family: sans-serif;
+      background: #EEE;
+      position: absolute;
+      width: 100%;
+      transition: all .3s ease;
+    }
+    input, textarea {
+      width: 50%;
+      margin-right: 50%;
+      line-height: 25px;
+      font-size: 20px;
+      padding: 5px 10px;
+      margin-bottom: 20px;
+      resize: none;
+    }
+    .demo-container {
+      padding: 20px;
+      position: absolute;
+      transition: all .3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <h1>Piano demo</h1>
+    <label for="input-1">right top positionned default layout</label>
+    <input type="text" name="input-1" id="input-1" data-piano data-piano-scale="1.5" data-piano-position="right, top" />
+    <label for="input-2">center middle positionned azerty layout</label>
+    <input type="text" name="input-2" id="input-2" data-piano data-piano-layout="azerty" data-piano-event-id="input-2" data-piano-position="center, middle"/>
+    <label for="input-3">absolute 150 - 150 positionned azerty layout</label>
+    <input type="text" name="input-3" id="input-3" data-piano data-piano-layout="azerty" data-piano-animation-in="bounceInUp" data-piano-animation-out="fadeOutUp" data-piano-position="absolute, 150, 20"/>
+    <label for="textarea">Textarea element</label>
+    <textarea name="textarea" rows="8" cols="40" data-piano data-piano-layout="azerty" data-piano-scale="1"></textarea>
+  </div>
+  <script src='./dist/bundle.js'></script>
+</body>
+</html>

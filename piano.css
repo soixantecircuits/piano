@@ -91,6 +91,9 @@
 .piano-container ul li.del {
   width: 100px;
 }
+.piano-container ul li.email {
+  width: 120px;
+}
 .piano-container ul li.space {
   width: 200px;
 }

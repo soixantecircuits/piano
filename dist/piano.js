@@ -233,7 +233,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var cursor = input.selectionStart;
 	      var end = input.selectionEnd;
 	      var diff = end - cursor || 1;
-	      var offset = 1;
+	      var offset = event.target.innerText.length;
 	      var limit = this.currentKeyboard.settings.limit;
 	      var submitEvent = this.currentKeyboard.settings.submitEvent;
 	

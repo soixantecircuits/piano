@@ -208,6 +208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.container.style.top = instance.settings.position.y + 'px';
 	      }
 	
+	      this.container.style.display = 'block';
 	      this.container.classList.remove(this.currentKeyboard.settings.animationOut);
 	      this.container.appendChild(rowsContainer);
 	      this.container.classList.add(this.currentKeyboard.settings.animationIn);
@@ -302,10 +303,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'hideKeyboard',
 	    value: function hideKeyboard() {
+	      var _this2 = this;
+	
 	      if (this.container.firstChild) {
 	        typeof this.onBeforeHidden === 'function' && this.onBeforeHidden();
 	        this.container.classList.remove(this.currentKeyboard.settings.animationIn);
 	        this.container.classList.add(this.currentKeyboard.settings.animationOut);
+	        setTimeout(function () {
+	          _this2.container.style.display = 'none';
+	        }, +this.container.style.animationDuration);
 	        document.body.classList.remove('piano-open');
 	        if (this.slideContent) {
 	          document.querySelector(this.slideContainer).style.top = 0;

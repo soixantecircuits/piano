@@ -7,6 +7,35 @@
 
 *Piano is still under active development.*
 
+# Usage with webpack
+1. `require('piano.js/piano.css')` (probably `entry.js` is a good place to do that)
+2. `var Piano = require('piano.js')` wherever you want to use _piano.js_
+3. Require layouts you want
+```
+var azerty = require('piano.js/layouts/azerty')
+  , qwerty = require('piano.js/layouts/qwerty')
+```
+4. Instantiate Piano
+```
+var keyboard = new Piano({
+  layouts: {
+    'azerty': azerty,
+    'qwerty': qwerty
+  },
+  slideContent: true
+})```
+
+5. Use data-attributes in your view
+```html
+<input type="text" data-piano data-piano-scale="1.5" data-piano-layout="azerty" data-piano-event-id="do-stuff" />
+```
+
+6. Use listener in your code
+```
+document.querySelector('[data-piano-event-id="do-stuff"]').addEventListener('do-stuff', doStuffCallback)
+```
+
+7. Enjoy!
 # Usage
 
 Download [piano](piano.js) and at least the [default layout](layouts/default.js) into your project and load them.

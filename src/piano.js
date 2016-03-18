@@ -13,7 +13,7 @@ class Piano {
       slideContainer: 'body',
       onBeforeHidden: function () { },
       onHidden: function () { },
-      layouts: layouts || []
+      layouts: options.layouts || []
     }
     
     this.settings = Object.assign(this.defaults, options)

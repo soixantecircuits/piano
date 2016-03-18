@@ -78,7 +78,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slideContainer: 'body',
 	      onBeforeHidden: function onBeforeHidden() {},
 	      onHidden: function onHidden() {},
-	      layouts: layouts || []
+	      layouts: options.layouts || []
 	    };
 	
 	    this.settings = _extends(this.defaults, options);

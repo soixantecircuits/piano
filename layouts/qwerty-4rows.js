@@ -9,11 +9,7 @@
  * @version 1.0b
  */
 
-/* globals piano */
-
-
-var layouts = layouts || []
-layouts['default'] = [
+module.exports = [
   // TODO: find a nice way to implement a 'ctrl' key.
   // ['1', '!'], ['2', '@'], ['3', '#'], ['4', '$'], ['5', '%'], ['6', '^'], ['7', '&'], ['8', '*'], ['9', '('], ['0', ')'], ['-', '_'], ['=', '+'], [{name: 'del', value: '⌫'}], ['break'],
   ['q'], ['w'], ['e'], ['r'], ['t'], ['y'], ['u'], ['i'], ['o'], ['p'], [{ name: 'del', value: '⌫' }], ['break'],

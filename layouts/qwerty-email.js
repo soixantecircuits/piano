@@ -5,14 +5,10 @@
  *
  * @author kucherenkovova <kucherenkovova@do-it.co>
  * @license MIT
- * @version 1.0b
+ * @version 2.0b
  */
 
-/* globals piano */
-
-
-var layouts = layouts || []
-layouts['qwerty'] = [
+module.exports = [
   [{name: 'email', value: '@gmail.com'}], [{name: 'email', value: '@yahoo.fr'}], [{name: 'email', value: '@hotmail.fr'}], ['break'],
   ['q'], ['w'], ['e'], ['r'], ['t'], ['y'], ['u'], ['i'], ['o'], ['p'], [{ name: 'del', value: '←' }], ['break'],
   ['a'], ['s'], ['d'], ['f'], ['g'], ['h'], ['j'], ['k'], ['l'], ["'", '"'], ['break'],

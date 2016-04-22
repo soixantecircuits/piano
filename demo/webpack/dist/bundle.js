@@ -52,64 +52,43 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2)
-	__webpack_require__(5)
-	__webpack_require__(7)
 
 
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(3)(__webpack_require__(4))
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	module.exports = function(src) {
-		if (typeof execScript === "function")
-			execScript(src);
-		else
-			eval.call(null, src);
-	}
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	module.exports = "/**\n * Piano\n * Desktop browser keyboard for touch screens\n *\n * Default layout (QWERTY)\n *\n * @author hugohil <hugo@soixantecircuits.fr>\n * @license MIT\n * @version 1.0b\n */\n\n/* globals piano */\n\nvar layouts = layouts || []\nlayouts['default'] = [\n  ['1', '!'], ['2', '@'], ['3', '#'], ['4', '$'], ['5', '%'], ['6', '^'], ['7', '&'], ['8', '*'], ['9', '('], ['0', ')'], ['-', '_'], ['=', '+'], [{ name: 'del', value: '⌫' }], ['break'],\n  ['q'], ['w'], ['e'], ['r'], ['t'], ['y'], ['u'], ['i'], ['o'], ['p'], ['[', '{'], [']', '}'], ['\\\\', '|'], ['break'],\n  ['a'], ['s'], ['d'], ['f'], ['g'], ['h'], ['j'], ['k'], ['l'], [';', ':'], [\"'\", '\"'], ['break'],\n  [{ name: 'shift', value: '↑' }], ['z'], ['x'], ['c'], ['v'], ['b'], ['n'], ['m'], [',', '<'], ['.', '>'], ['/', '?'], [{ name: 'shift', value: '↑' }], ['break'],\n  [{ name: 'larr', value: '<' }], [{ name: 'space', value: ' ' }], [{ name: 'rarr', value: '>' }], [{ name: 'hide', value: '⌨' }]\n]\n"
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(3)(__webpack_require__(6))
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	module.exports = "/**\n * Piano\n * Desktop browser keyboard for touch screens\n *\n * custom AZERTY layout\n *\n * @author hugohil <hugo@soixantecircuits.fr>\n * @license MIT\n * @version 1.0b\n */\n\n/* globals piano */\n\nvar layouts = layouts || []\nlayouts['azerty'] = [\n  ['&', '1'], ['é', '2'], ['\"', '3'], [\"'\", '4'], ['(', '5'], [')', '6'], ['è', '7'], ['!', '8'], ['ç', '9'], ['à', '0'], ['-', '_'], [{ name: 'del', value: '&larr;' }], ['break'],\n  ['a'], ['z'], ['e'], ['r'], ['t'], ['y'], ['u'], ['i'], ['o'], ['p'], ['^'], ['$', '*'], ['@', '#'], ['break'],\n  ['q'], ['s'], ['d'], ['f'], ['g'], ['h'], ['j'], ['k'], ['l'], ['m'], ['ù', '%'], ['break'],\n  [{ name: 'shift', value: '&123' }], ['w'], ['x'], ['c'], ['v'], ['b'], ['n'], [',', '?'], ['.', ';'], ['/', ':'], ['=', '+'], [{ name: 'shift', value: '↑' }], ['break'],\n  [{ name: 'larr', value: '&lsaquo;' }], [{ name: 'space', value: ' ' }], [{ name: 'rarr', value: '&rsaquo;' }], [{ name: 'hide', value: '&times;' }], [{ name: 'submit', value: '&ldsh;' }]\n]\n"
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
 	
 	module.exports = (function app () {
 	  'use strict'
 
-	  let self = {}
-	  var piano = __webpack_require__(8)
-	  
+	  var piano = __webpack_require__(3)  
+	  var azertyMail = [
+	    [{name: 'email', value: '@gmail.com'}], [{name: 'email', value: '@yahoo.fr'}], [{name: 'email', value: '@hotmail.fr'}], ['break'],
+	    ['&', '1'], ['é', '2'], ['"', '3'], ["'", '4'], ['(', '5'], [')', '6'], ['è', '7'], ['!', '8'], ['ç', '9'], ['à', '0'], ['-', '_'], [{ name: 'del', value: '&larr;' }], ['break'],
+	    ['a'], ['z'], ['e'], ['r'], ['t'], ['y'], ['u'], ['i'], ['o'], ['p'], ['^'], ['$', '*'], ['@', '#'], ['break'],
+	    ['q'], ['s'], ['d'], ['f'], ['g'], ['h'], ['j'], ['k'], ['l'], ['m'], ['ù', '%'], ['break'],
+	    [{ name: 'shift', value: '&123' }], ['w'], ['x'], ['c'], ['v'], ['b'], ['n'], [',', '?'], ['.', ';'], ['/', ':'], ['=', '+'], [{ name: 'shift', value: '↑' }], ['break'],
+	    [{ name: 'larr', value: '&lsaquo;' }], [{ name: 'space', value: ' ' }], [{ name: 'rarr', value: '&rsaquo;' }], [{ name: 'hide', value: '&times;' }], [{ name: 'submit', value: '&ldsh;' }]
+	  ]
+	  var azerty = [
+	    ['&', '1'], ['é', '2'], ['"', '3'], ["'", '4'], ['(', '5'], [')', '6'], ['è', '7'], ['!', '8'], ['ç', '9'], ['à', '0'], ['-', '_'], [{ name: 'del', value: '&larr;' }], ['break'],
+	    ['a'], ['z'], ['e'], ['r'], ['t'], ['y'], ['u'], ['i'], ['o'], ['p'], ['^'], ['$', '*'], ['@', '#'], ['break'],
+	    ['q'], ['s'], ['d'], ['f'], ['g'], ['h'], ['j'], ['k'], ['l'], ['m'], ['ù', '%'], ['break'],
+	    [{ name: 'shift', value: '&123' }], ['w'], ['x'], ['c'], ['v'], ['b'], ['n'], [',', '?'], ['.', ';'], ['/', ':'], ['=', '+'], [{ name: 'shift', value: '↑' }], ['break'],
+	    [{ name: 'larr', value: '&lsaquo;' }], [{ name: 'space', value: ' ' }], [{ name: 'rarr', value: '&rsaquo;' }], [{ name: 'hide', value: '&times;' }], [{ name: 'submit', value: '&ldsh;' }]
+	  ]
+
+	  console.log(azerty)
+
 	  var keyboard = new piano({
 	    triggerEvent: ['click', 'touchstart'],
 	    slideContent: true,
 	    slideContainer: '.demo-container',
+	    layouts: {
+	      'azerty': azerty,
+	      'azerty-mail': azertyMail
+	    },
 	    onHidden: function () {
 	      console.log('hidden')
 	    },
@@ -127,13 +106,12 @@
 	  document.querySelector('#input-2').addEventListener('input-2', function (event) {
 	    console.log('element with id "%s" submitted.', event.target.id)
 	  })
-	  
-	  return self
+
 	})()
 
 
 /***/ },
-/* 8 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -216,7 +194,7 @@
 		      slideContainer: 'body',
 		      onBeforeHidden: function onBeforeHidden() {},
 		      onHidden: function onHidden() {},
-		      layouts: layouts || []
+		      layouts: options.layouts || []
 		    };
 		
 		    this.settings = _extends(this.defaults, options);
@@ -346,6 +324,7 @@
 		        this.container.style.top = instance.settings.position.y + 'px';
 		      }
 		
+		      this.container.style.display = 'block';
 		      this.container.classList.remove(this.currentKeyboard.settings.animationOut);
 		      this.container.appendChild(rowsContainer);
 		      this.container.classList.add(this.currentKeyboard.settings.animationIn);
@@ -371,7 +350,7 @@
 		      var cursor = input.selectionStart;
 		      var end = input.selectionEnd;
 		      var diff = end - cursor || 1;
-		      var offset = 1;
+		      var offset = event.target.innerText.length;
 		      var limit = this.currentKeyboard.settings.limit;
 		      var submitEvent = this.currentKeyboard.settings.submitEvent;
 		
@@ -440,10 +419,15 @@
 		  }, {
 		    key: 'hideKeyboard',
 		    value: function hideKeyboard() {
+		      var _this2 = this;
+		
 		      if (this.container.firstChild) {
 		        typeof this.onBeforeHidden === 'function' && this.onBeforeHidden();
 		        this.container.classList.remove(this.currentKeyboard.settings.animationIn);
 		        this.container.classList.add(this.currentKeyboard.settings.animationOut);
+		        setTimeout(function () {
+		          _this2.container.style.display = 'none';
+		        }, +this.container.style.animationDuration);
 		        document.body.classList.remove('piano-open');
 		        if (this.slideContent) {
 		          document.querySelector(this.slideContainer).style.top = 0;

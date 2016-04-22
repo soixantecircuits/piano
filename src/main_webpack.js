@@ -2,7 +2,7 @@
 module.exports = (function app () {
   'use strict'
 
-  var piano = require('../../../dist/piano.js')  
+  var piano = require('../piano.js')  
   var azertyMail = [
     [{name: 'email', value: '@gmail.com'}], [{name: 'email', value: '@yahoo.fr'}], [{name: 'email', value: '@hotmail.fr'}], ['break'],
     ['&', '1'], ['é', '2'], ['"', '3'], ["'", '4'], ['(', '5'], [')', '6'], ['è', '7'], ['!', '8'], ['ç', '9'], ['à', '0'], ['-', '_'], [{ name: 'del', value: '&larr;' }], ['break'],

@@ -1,4 +1,4 @@
-// TODO: comment and organize this stylesheet
+/* TODO: comment and organize this stylesheet */
 .piano-container.left {
   left: 0;
 }
@@ -22,14 +22,20 @@
 .piano-container {
   margin: 0;
   padding: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
   max-width: 1080px;
   z-index: 999;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -khtml-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
 }
 .piano-container .piano-rows {
   background: #000;
   padding: 1em 0;
+  position: relative;
 }
 .piano-container ul {
   margin: auto;
@@ -42,6 +48,11 @@
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 0;
 }
 .piano-container ul li {
   display: inline-block;
@@ -50,6 +61,9 @@
   width: 50px;
   padding: 0 .2em;
   vertical-align: middle;
+}
+.piano-container ul li:empty {
+  display: none;
 }
 .piano-container ul li .key {
   height: 100%;
@@ -77,6 +91,9 @@
 .piano-container ul li.del {
   width: 100px;
 }
+.piano-container ul li.email {
+  width: 120px;
+}
 .piano-container ul li.space {
   width: 200px;
 }
@@ -84,8 +101,8 @@
   position: absolute;
   right: 20px;
   bottom: 20px;
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 70px;
 }
 .piano-container ul li.hide {
   position: absolute;
@@ -93,6 +110,9 @@
   top: 20px;
   width: 50px;
   height: 50px;
+}
+.piano-container ul .hide {
+  display: inherit !important;
 }
 .piano-container ul li .key:active:after {
   content: attr(data-piano-key);

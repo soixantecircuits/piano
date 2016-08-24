@@ -178,7 +178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      for (var i in layout) {
 	        var li = document.createElement('li');
-	        if (layout[i] == 'break') {
+	        if (layout[i] === 'break') {
 	          rowsContainer.appendChild(rows[rows.length - 1]);
 	          rows.push(document.createElement('ul'));
 	        } else {

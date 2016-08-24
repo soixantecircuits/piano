@@ -78,7 +78,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slideContainer: 'body',
 	      onBeforeHidden: function onBeforeHidden() {},
 	      onHidden: function onHidden() {},
-	      layouts: options.layouts || []
+	      layouts: options.layouts || [],
+	      autohide: true
 	    };
 	
 	    this.settings = _extends(this.defaults, options);
@@ -86,11 +87,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.detectInputs();
 	    document.body.appendChild(this.container);
 	    // Make sure to hide keyboard when clicking outside
-	    addMultipleListeners(['click', 'touchdown'], document, function (event) {
-	      if (event.target.dataset.piano !== '' && !this.container.contains(event.target)) {
-	        this.hideKeyboard();
-	      }
-	    }.bind(this));
+	    if (this.settings.autohide) {
+	      addMultipleListeners(['click', 'touchdown'], document, function (event) {
+	        if (event.target.dataset.piano !== '' && !this.container.contains(event.target)) {
+	          this.hideKeyboard();
+	        }
+	      }.bind(this));
+	    }
 	  }
 	
 	  _createClass(Piano, [{

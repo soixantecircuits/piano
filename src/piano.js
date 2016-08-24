@@ -13,22 +13,25 @@ class Piano {
       slideContainer: 'body',
       onBeforeHidden: function () { },
       onHidden: function () { },
-      layouts: options.layouts || []
+      layouts: options.layouts || [],
+      autohide: true
     }
-    
+
     this.settings = Object.assign(this.defaults, options)
     this.container = Object.assign(document.createElement('div'), { id: 'piano', className: 'piano-container animated' })
     this.detectInputs()
     document.body.appendChild(this.container)
     // Make sure to hide keyboard when clicking outside
-    addMultipleListeners(['click', 'touchdown'], document, function (event) {
-      if (event.target.dataset.piano !== '' && !this.container.contains(event.target)) {
-        this.hideKeyboard()
-      }
-    }.bind(this))
+    if (this.settings.autohide) {
+      addMultipleListeners(['click', 'touchdown'], document, function (event) {
+        if (event.target.dataset.piano !== '' && !this.container.contains(event.target)) {
+          this.hideKeyboard()
+        }
+      }.bind(this))
+    }
   }
 
-  detectInputs() {
+  detectInputs () {
     let createKeyboard = (parent, target) => {
       let _k = Object.assign({}, parent)
       delete _k.triggers
@@ -105,7 +108,7 @@ class Piano {
 
     for (var i in layout) {
       var li = document.createElement('li')
-      if (layout[i] == 'break') {
+      if (layout[i] === 'break') {
         rowsContainer.appendChild(rows[rows.length - 1])
         rows.push(document.createElement('ul'))
       } else {
@@ -296,7 +299,7 @@ function addMultipleListeners (events, target, handler) {
 }
 
 // Helpers function for piano object
-function debounce(func, wait, immediate) {
+function debounce (func, wait, immediate) {
   var timeout
   return function () {
     var context = this

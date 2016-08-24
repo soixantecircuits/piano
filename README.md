@@ -169,7 +169,7 @@ You can pass options to your `piano.init()` call. Here they are:
 
 
 ## Demo
-Make sure you have `node`, `npm` and `gulp` installed. After you have installed development dependencies with `npm i`, you can run `gulp serve` and go to `http://localhost:8080/demo` to check a demo.
+Make sure you have `node`, `npm` and `gulp` installed. After you have installed development dependencies with `npm i`, you can run `npm run dev` and go to `http://localhost:9966/demo` to check a demo.
 
 Or you can check it out [here](http://soixantecircuits.github.io/piano).
 

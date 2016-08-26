@@ -1,5 +1,9 @@
-# Piano ⌨
-
+<h1 align="center">
+  <img src="https://rawgit.com/soixantecircuits/piano/master/piano-icon.png" alt="piano">
+  <br>
+  ⌨ Piano.js
+  <br><br>
+</h1>
 > Customizable virtual keyboard written in pure JavaScript.
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)

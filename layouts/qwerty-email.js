@@ -5,7 +5,7 @@
  *
  * @author kucherenkovova <kucherenkovova@do-it.co>
  * @license MIT
- * @version 1.0b
+ * @version 2.0b
  */
 
 module.exports = [

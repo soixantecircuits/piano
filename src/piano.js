@@ -24,7 +24,8 @@ class Piano {
     // Make sure to hide keyboard when clicking outside
     if (this.settings.autohide) {
       addMultipleListeners(['click', 'touchdown'], document, function (event) {
-        if (event.target.dataset.piano !== '' && !this.container.contains(event.target)) {
+        var dataset = event.target.dataset || {};
+        if (dataset.piano !== '' && !this.container.contains(event.target)) {
           this.hideKeyboard()
         }
       }.bind(this))

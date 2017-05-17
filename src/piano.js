@@ -2,7 +2,7 @@
 
 class Piano {
 
-  constructor(options) {
+  constructor (options) {
     if (document.querySelectorAll('#piano').length) {
       console.warn('piano is already initialized')
       return false
@@ -14,7 +14,8 @@ class Piano {
       onBeforeHidden: function () { },
       onHidden: function () { },
       layouts: options.layouts || [],
-      autohide: true
+      autohide: true,
+      autoScroll: true
     }
 
     this.settings = Object.assign(this.defaults, options)
@@ -212,6 +213,22 @@ class Piano {
     }
 
     input.focus()
+  }
+
+  scrollWindow () {
+    var input = this.currentTarget.getBoundingClientRect().top - 100
+    var posY = window.scrollY + input
+    input > 0 && this.scrollTo(posY, 300)
+  }
+  scrollTo (to, duration) {
+    if (duration <= 0) return
+    var difference = to - window.scrollY
+    var perTick = difference / duration * 10
+    setTimeout(() => {
+      window.scrollTo(0, window.scrollY + perTick)
+      if (window.scrollY === to) return
+      this.scrollTo(to, duration - 10)
+    }, 10)
   }
 
   switchCase () {

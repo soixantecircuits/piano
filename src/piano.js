@@ -50,7 +50,7 @@ class Piano {
           options.position = (datas.pianoPosition) ? datas.pianoPosition.split(',') : []
         }
       } else {
-        console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target)
+        //console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target)
         options.position = []
       }
       // Object.assign(options, datas)

@@ -163,6 +163,19 @@ function testBrowser () {
     }))
     .pipe(gulp.dest('./tmp'))
 }
+
+function server () {
+  gulp.src('demo')
+    .pipe($.webserver({
+      livereload: true,
+      fallback: 'index.html',
+      open: true,
+      port: 8080
+    }))
+  gulp.watch(path.join('src/', config.entryFileName + '.js'), ['dev-build'])
+  console.log('Watching File : src/', config.entryFileName + '.js')
+}
+
 function develop () {
   gulp.src(path.join('src/', config.entryFileName + '.js'))
   .pipe($.plumber())
@@ -180,16 +193,6 @@ function develop () {
     devtool: 'source-map'
   }))
   .pipe(gulp.dest('./demo/dist'))
-
-  gulp.src('demo')
-    .pipe($.webserver({
-      livereload: true,
-      fallback: 'index.html',
-      open: true,
-      port: 8080
-    }))
-  gulp.watch(path.join('src/', config.entryFileName + '.js'), ['devevelop'])
-  console.log('Watching File : src/', config.entryFileName + '.js')
 }
 // Remove the built files
 gulp.task('clean', cleanDist)
@@ -222,7 +225,13 @@ gulp.task('coverage', ['lint'], coverage)
 gulp.task('test-browser', ['lint', 'clean-tmp'], testBrowser)
 
 // develop
-gulp.task('develop', develop)
+gulp.task('develop', ['server'], develop)
+
+// webpack
+gulp.task('server', server)
+
+//dev-build
+gulp.task('dev-build', develop)
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', watch)

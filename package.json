@@ -1,9 +1,9 @@
 {
   "name": "piano.js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Customizable virtual keyboard written in pure ES6",
   "main": "./build/piano.js",
-  "style": "piano.css",
+  "style": "./demo/css/piano.css",
   "scripts": {
     "test": "gulp",
     "lint": "gulp lint",
@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/soixantecircuits/piano.git"
   },
-  "keywords": [],
+  "keywords": ["piano", "piano.js", "keyboard"],
   "author": "Soixante circuits <contact@soixantecircuits.fr>",
   "license": "MIT",
   "bugs": {

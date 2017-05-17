@@ -163,7 +163,34 @@ function testBrowser () {
     }))
     .pipe(gulp.dest('./tmp'))
 }
+function develop () {
+  gulp.src(path.join('src/', config.entryFileName + '.js'))
+  .pipe($.plumber())
+  .pipe(webpackStream({
+    output: {
+      filename: exportFileName + '.js',
+      libraryTarget: 'umd',
+      library: config.mainVarName
+    },
+    module: {
+      loaders: [
+        { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+      ]
+    },
+    devtool: 'source-map'
+  }))
+  .pipe(gulp.dest('./demo/dist'))
 
+  gulp.src('demo')
+    .pipe($.webserver({
+      livereload: true,
+      fallback: 'index.html',
+      open: true,
+      port: 8080
+    }))
+  gulp.watch(path.join('src/', config.entryFileName + '.js'), ['devevelop'])
+  console.log('Watching File : src/', config.entryFileName + '.js')
+}
 // Remove the built files
 gulp.task('clean', cleanDist)
 
@@ -193,6 +220,9 @@ gulp.task('coverage', ['lint'], coverage)
 
 // Set up a livereload environment for our spec runner `test/runner.html`
 gulp.task('test-browser', ['lint', 'clean-tmp'], testBrowser)
+
+// develop
+gulp.task('develop', develop)
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', watch)

@@ -52,11 +52,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
@@ -89,7 +89,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Make sure to hide keyboard when clicking outside
 	    if (this.settings.autohide) {
 	      addMultipleListeners(['click', 'touchdown'], document, function (event) {
-	        if (event.target.dataset.piano !== '' && !this.container.contains(event.target)) {
+	        var dataset = event.target.dataset || {};
+	        if (dataset.piano !== '' && !this.container.contains(event.target)) {
 	          this.hideKeyboard();
 	        }
 	      }.bind(this));
@@ -402,7 +403,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = Piano;
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;

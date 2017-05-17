@@ -173,7 +173,7 @@ You can pass options to your `piano.init()` call. Here they are:
 
 
 ## Demo
-Make sure you have `node`, `npm` and `gulp` installed. After you have installed development dependencies with `npm i`, you can run `npm run dev` and go to `http://localhost:9966/demo` to check a demo.
+Juste open index.html in your favorite browser and check it out ! 
 
 Or you can check it out [here](http://soixantecircuits.github.io/piano).
 
@@ -181,6 +181,8 @@ Or you can check it out [here](http://soixantecircuits.github.io/piano).
 *Soon.*
 
 ## Development
+We use gulp to develop, to contribute to piano, just use `gulp develop`. It will watch src/piano and serve it over localhost on port 8080.
+
 Create a `feature-[name-of-the-feature]` branch and make PR on the `dev` branch. Please use the [standard js coding style](https://github.com/feross/standard).
 
 ## To Do

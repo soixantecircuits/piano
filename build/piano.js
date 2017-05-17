@@ -79,7 +79,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      onBeforeHidden: function onBeforeHidden() {},
 	      onHidden: function onHidden() {},
 	      layouts: options.layouts || [],
-	      autohide: true
+	      autohide: true,
+	      autoScroll: true
 	    };
 	
 	    this.settings = _extends(this.defaults, options);
@@ -179,7 +180,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      for (var i in layout) {
 	        var li = document.createElement('li');
-	        if (layout[i] === 'break') {
+	        if (layout[i][0] === 'break') {
 	          rowsContainer.appendChild(rows[rows.length - 1]);
 	          rows.push(document.createElement('ul'));
 	        } else {
@@ -225,6 +226,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	
 	      document.body.classList.add('piano-open');
+	      this.settings.autoScroll && this.scrollWindow();
 	      if (this.slideContent) {
 	        document.querySelector(this.slideContainer).style.top = '-' + rowsContainer.getBoundingClientRect().height / 2 + 'px';
 	      }
@@ -285,6 +287,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	      input.focus();
 	    }
 	  }, {
+	    key: 'scrollWindow',
+	    value: function scrollWindow() {
+	      var input = this.currentTarget.getBoundingClientRect().top - 100;
+	      var posY = window.scrollY + input;
+	      input > 0 && this.scrollTo(posY, 300);
+	    }
+	  }, {
+	    key: 'scrollTo',
+	    value: function scrollTo(to, duration) {
+	      var _this2 = this;
+	
+	      if (duration <= 0) return;
+	      var difference = to - window.scrollY;
+	      var perTick = difference / duration * 10;
+	      setTimeout(function () {
+	        window.scrollTo(0, window.scrollY + perTick);
+	        if (window.scrollY === to) return;
+	        _this2.scrollTo(to, duration - 10);
+	      }, 10);
+	    }
+	  }, {
 	    key: 'switchCase',
 	    value: function switchCase() {
 	      var shift = this.currentKeyboard.shift = !this.currentKeyboard.shift;
@@ -307,20 +330,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'hideKeyboard',
 	    value: function hideKeyboard() {
-	      var _this2 = this;
+	      var _this3 = this;
 	
-	      if (this.container.firstChild) {
-	        typeof this.onBeforeHidden === 'function' && this.onBeforeHidden();
+	      if (this.container.style.display === 'block') {
+	        typeof this.settings.onBeforeHidden === 'function' && this.settings.onBeforeHidden();
 	        this.container.classList.remove(this.currentKeyboard.settings.animationIn);
 	        this.container.classList.add(this.currentKeyboard.settings.animationOut);
 	        setTimeout(function () {
-	          _this2.container.style.display = 'none';
-	        }, +this.container.style.animationDuration);
+	          _this3.container.style.display = 'none';
+	          typeof _this3.settings.onHidden === 'function' && _this3.settings.onHidden();
+	        }, this.container.style.animationDuration * 1000 || 300);
 	        document.body.classList.remove('piano-open');
 	        if (this.slideContent) {
 	          document.querySelector(this.slideContainer).style.top = 0;
 	        }
-	        typeof this.onHidden === 'function' && this.onHidden();
 	      }
 	    }
 	  }, {

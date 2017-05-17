@@ -2,7 +2,7 @@
   "name": "piano.js",
   "version": "0.0.4",
   "description": "Customizable virtual keyboard written in pure ES6",
-  "main": "./dist/piano.js",
+  "main": "./build/piano.js",
   "style": "piano.css",
   "scripts": {
     "test": "gulp",
@@ -11,7 +11,7 @@
     "watch": "gulp watch",
     "build": "gulp build",
     "coverage": "gulp coverage",
-    "dev": "budo --live",
+    "dev": "gulp develop",
     "patch": "./node_modules/np/cli.js patch"
   },
   "repository": {

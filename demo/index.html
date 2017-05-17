@@ -3,51 +3,130 @@
 <head>
   <title>Piano demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="./animate.css">
-  <link rel="stylesheet" type="text/css" href="./piano.css">
+  <link rel="stylesheet" type="text/css" href="./css/animate.css">
+  <link rel="stylesheet" type="text/css" href="./css/piano.css">
+  <link rel="icon" type="image/png" href="../piano-icon.png" />
   <style type="text/css">
     * {
       padding: 0;
       margin: 0;
     }
     body {
-      overflow: hidden;
+      overflow-y: scroll;
+      overflow-x: none;
       font-family: sans-serif;
-      background: #EEE;
+      background: white;
       position: absolute;
       width: 100%;
       transition: all .3s ease;
     }
+    h3{
+      font-size: 1.2em;
+      font-weight: bold;
+    }
     input, textarea {
-      width: 50%;
+      background: #EEE;
+      width: 90%;
       margin-right: 50%;
       line-height: 25px;
       font-size: 20px;
       padding: 5px 10px;
       margin-bottom: 20px;
+      margin-top: 10px;
       resize: none;
+      border: none;
+      border-radius: 18px;
+      text-decoration: none;
+      -o-appearance:none;
+      -moz-appearance: none;
+      -khtml-appearance: none;
+      -webkit-appearance: none;
+      box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    }
+    input:focus, textarea:focus{
+
+    outline: none;
+    border: #00ffa6 3px solid;
+    -webkit-appearance: none;
     }
     .demo-container {
       padding: 20px;
       position: absolute;
       transition: all .3s ease;
+      width: 80%;
+      margin-left: 10%;
+    }
+    img{
+      display: block;
+      margin: auto;
+    }
+    h1{
+      text-align: center
+    }
+    .piano-header{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .attrDesc{
+      font-style: italic;
+      color: #696969;
+      margin-left: 5%;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      line-height: 1.2em;
+    }
+    .desc{
+      background: #EEE;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      text-align: justify;
+    }
+    .desc > p {
+      width: 80%;
+      margin-left: 10%;
+      line-height: 1.5em;
+    }
+    p > a {
+      color: #4078c0;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
+  <div class="piano-header">
+    <img src="./img/piano-icon.png" alt="logo">
+    <h1> ⌨ Piano.js demo</h1>
+
+  </div>
+  <div class="desc">
+    <p>Piano Js is Customizable virtual keyboard written in pure JavaScript. Piano js is browser friendly, common JS and Es6 friendly so can just import it, rquire it, or use script tag to use it. Piano js comes with differents layout you can check it here, or build your own ! </br>
+    You can find all the doc on the git repo: <a href="https://github.com/soixantecircuits/piano">https://github.com/soixantecircuits/piano </a> </br>
+    js-standard-style Join the chat at <a href="https://gitter.im/soixantecircuits/piano">https://gitter.im/soixantecircuits/piano</a>
+    </p>
+  </div>
   <div class="demo-container">
-    <h1>Piano demo</h1>
-    <label for="input-1">right top positionned default layout</label>
-    <input type="text" name="input-1" id="input-1" data-piano data-piano-layout="azerty" data-piano-scale="1.5" data-piano-position="right, top" />
-    <label for="input-1">Email layout</label>
-    <input type="text" name="input-1" id="input-1" data-piano data-piano-layout="azerty-mail" data-piano-scale="1" />
-    <label for="input-2">center middle positionned azerty layout</label>
-    <input type="text" name="input-2" id="input-2" data-piano data-piano-layout="azerty" data-piano-event-id="input-2" data-piano-position="center, middle"/>
-    <label for="input-3">absolute 150 - 150 positionned azerty layout</label>
-    <input type="text" name="input-3" id="input-3" data-piano data-piano-layout="azerty" data-piano-animation-in="bounceInUp" data-piano-animation-out="fadeOutUp" data-piano-position="absolute, 150, 20"/>
-    <label for="textarea">Textarea element</label>
+    <h3 for="input-1">Default layout</h3>
+    <p class="attrDesc"> data-piano-layout="azerty" </br> data-piano-scale="1"</p>
+    <input type="text" placeholder="Click Me !" name="input-1" id="input-1" data-piano data-piano-layout="azerty" data-piano-scale="1" />
+    <h3 for="input-1">Email layout</h3>
+    <p class="attrDesc"> data-piano-layout="azerty-mail" </br> data-piano-scale="1"</p>
+    <input type="text" placeholder="Click Me !" name="input-1" id="input-1" data-piano data-piano-layout="azerty-mail" data-piano-scale="1" />
+    <h3 for="input-1">Right top positionned default layout</h3>
+    <p class="attrDesc"> data-piano-layout="azerty" </br> data-piano-scale="1.5" </br> data-piano-position="right, top"</p>
+    <input type="text" placeholder="Click Me !" name="input-1" id="input-1" data-piano data-piano-layout="azerty" data-piano-scale="1.5" data-piano-position="right, top" />
+    <h3 for="input-2">Center middle positionned azerty layout</h3>
+    <p class="attrDesc">  data-piano-layout="azerty" </br> data-piano-event-id="input-2" </br> data-piano-position="center, middle"</p>
+    <input type="text" placeholder="Click Me !" name="input-2" id="input-2" data-piano data-piano-layout="azerty" data-piano-event-id="input-2" data-piano-position="center, middle"/>
+    <h3 for="input-3">Absolute 150 - 150 positionned azerty layout</h3>
+    <p class="attrDesc"> data-piano-layout="azerty" </br> data-piano-animation-in="bounceInUp" </br> data-piano-animation-out="fadeOutUp" </br> data-piano-position="absolute, 150, 20"</p>
+    <input type="text" placeholder="Click Me !" name="input-3" id="input-3" data-piano data-piano-layout="azerty" data-piano-animation-in="bounceInUp" data-piano-animation-out="fadeOutUp" data-piano-position="absolute, -150, 20"/>
+    <h3 for="textarea">Textarea element</h3>
+    <p class="attrDesc"> data-piano-layout="azerty" </br> data-piano-scale="1"</p>
     <textarea name="textarea" rows="8" cols="40" data-piano data-piano-layout="azerty" data-piano-scale="1"></textarea>
   </div>
-  <script src='./dist/bundle.js'></script>
+  <script src='./js/piano.js'></script>
+  <script src='./js/index.js'></script>
 </body>
 </html>

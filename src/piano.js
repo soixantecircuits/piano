@@ -156,6 +156,7 @@ class Piano {
     }
 
     document.body.classList.add('piano-open')
+    this.settings.autoScroll && this.scrollWindow()
     if (this.slideContent) {
       document.querySelector(this.slideContainer).style.top = '-' + (rowsContainer.getBoundingClientRect().height / 2) + 'px'
     }
@@ -251,18 +252,18 @@ class Piano {
   }
 
   hideKeyboard () {
-    if (this.container.firstChild) {
-      typeof this.onBeforeHidden === 'function' && this.onBeforeHidden()
+    if (this.container.style.display === 'block') {
+      typeof this.settings.onBeforeHidden === 'function' && this.settings.onBeforeHidden()
       this.container.classList.remove(this.currentKeyboard.settings.animationIn)
       this.container.classList.add(this.currentKeyboard.settings.animationOut)
       setTimeout(() => {
         this.container.style.display = 'none'
-      }, +this.container.style.animationDuration)
+        typeof this.settings.onHidden === 'function' && this.settings.onHidden()
+      }, this.container.style.animationDuration * 1000 || 300)
       document.body.classList.remove('piano-open')
       if (this.slideContent) {
         document.querySelector(this.slideContainer).style.top = 0
       }
-      typeof this.onHidden === 'function' && this.onHidden()
     }
   }
 

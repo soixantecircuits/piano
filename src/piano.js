@@ -110,7 +110,7 @@ class Piano {
 
     for (var i in layout) {
       var li = document.createElement('li')
-      if (layout[i] === 'break') {
+      if (layout[i][0] === 'break') {
         rowsContainer.appendChild(rows[rows.length - 1])
         rows.push(document.createElement('ul'))
       } else {

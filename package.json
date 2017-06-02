@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "description": "Customizable virtual keyboard written in pure ES6",
   "main": "./build/piano.js",
-  "style": "./demo/css/piano.css",
+  "style": "./build/piano.css",
   "scripts": {
     "test": "gulp",
     "lint": "gulp lint",

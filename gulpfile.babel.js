@@ -163,6 +163,11 @@ function testBrowser () {
     }))
     .pipe(gulp.dest('./tmp'))
 }
+function style () {
+  return gulp.src('demo/css/*.css')
+   .pipe($.concatCss('piano.css'))
+   .pipe(gulp.dest('build/'))
+}
 
 function server () {
   gulp.src('demo')
@@ -213,8 +218,9 @@ gulp.task('lint-gulpfile', lintGulpfile)
 gulp.task('lint', ['lint-src', 'lint-test', 'lint-gulpfile'])
 
 // Build two versions of the library
-gulp.task('build', ['lint', 'clean'], build)
+gulp.task('build', ['lint', 'clean', 'style'], build)
 
+gulp.task('style', style)
 // Lint and run our tests
 gulp.task('test', ['lint'], test)
 

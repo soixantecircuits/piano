@@ -18,7 +18,11 @@
     "type": "git",
     "url": "https://github.com/soixantecircuits/piano.git"
   },
-  "keywords": ["piano", "piano.js", "keyboard"],
+  "keywords": [
+    "piano",
+    "piano.js",
+    "keyboard"
+  ],
   "author": "Soixante circuits <contact@soixantecircuits.fr>",
   "license": "MIT",
   "bugs": {
@@ -38,6 +42,7 @@
     "glob": "^6.0.3",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
+    "gulp-concat-css": "^2.3.0",
     "gulp-eslint": "^1.1.1",
     "gulp-filter": "^3.0.0",
     "gulp-istanbul": "^0.10.3",

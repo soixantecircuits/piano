@@ -31,11 +31,32 @@
   -khtml-transition: all .3s ease;
   -o-transition: all .3s ease;
   transition: all .3s ease;
+<<<<<<< HEAD:piano.css
+=======
+  animation-duration: .3s;
+>>>>>>> master:demo/css/piano.css
 }
 .piano-container .piano-rows {
-  background: #000;
   padding: 1em 0;
   position: relative;
+<<<<<<< HEAD:piano.css
+=======
+}
+.piano-rows::after {
+    background: black;
+    content: '';
+    overflow: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    /*-webkit-backdrop-filter: blur(20px);
+    -moz-backdrop-filter: blur(20px);
+    filter: blur(20px);*/
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+>>>>>>> master:demo/css/piano.css
 }
 .piano-container ul {
   margin: auto;
@@ -72,7 +93,8 @@
   color: #FFF;
   font-size: 1em;
   text-align: center;
-  border: none;
+  border:none;
+  border-radius:5px;
   user-select: none;
   -o-user-select:none;
   -moz-user-select: none;
@@ -82,10 +104,12 @@
   position: relative;
 }
 .piano-container ul li .key:active {
-  background: #2323AA;
+  -webkit-appearance: none;
+  background: #00ffa6;
   outline: none;
 }
 .piano-container ul li .key:focus {
+
   outline: none;
 }
 .piano-container ul li.del {
@@ -128,4 +152,11 @@
 }
 .piano-container ul li .space:active:after {
   display: none;
+}
+button{
+  text-decoration: none;
+  -o-appearance:none;
+  -moz-appearance: none;
+  -khtml-appearance: none;
+  -webkit-appearance: none;
 }

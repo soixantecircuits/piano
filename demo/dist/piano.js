@@ -52,11 +52,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
@@ -73,12 +73,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return false;
 	    }
 	    this.defaults = {
-	      triggerEvents: ['click'],
+	      triggerEvents: navigator.userAgent.indexOf('Chrome') !== -1 ? ['pointerup'] : ['click', 'touchdown'],
 	      slideContent: false,
 	      slideContainer: 'body',
 	      onBeforeHidden: function onBeforeHidden() {},
 	      onHidden: function onHidden() {},
-	      layouts: options.layouts || []
+	      layouts: options.layouts || [],
+	      autohide: true,
+	      autoScroll: true
 	    };
 	
 	    this.settings = _extends(this.defaults, options);
@@ -86,11 +88,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.detectInputs();
 	    document.body.appendChild(this.container);
 	    // Make sure to hide keyboard when clicking outside
-	    addMultipleListeners(['click', 'touchdown'], document, function (event) {
-	      if (event.target.dataset.piano !== '' && !this.container.contains(event.target)) {
-	        this.hideKeyboard();
-	      }
-	    }.bind(this));
+	    if (this.settings.autohide) {
+	      addMultipleListeners(this, this.defaults.triggerEvents, document, function (event) {
+	        var dataset = event.target.dataset || {};
+	        if (dataset.piano !== '' && !this.container.contains(event.target)) {
+	          this.hideKeyboard();
+	        }
+	      }.bind(this));
+	    }
 	  }
 	
 	  _createClass(Piano, [{
@@ -114,7 +119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            options.position = datas.pianoPosition ? datas.pianoPosition.split(',') : [];
 	          }
 	        } else {
-	          console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target);
+	          //console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target)
 	          options.position = [];
 	        }
 	        // Object.assign(options, datas)
@@ -146,10 +151,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	          scale: options.scale || 1
 	        };
 	
-	        addMultipleListeners(['click', 'touchdown'], target, function (event) {
+	        addMultipleListeners(_this, _this.defaults.triggerEvents, target, function (event) {
 	          this.clearKeyboards();
 	          this.currentTarget = event.target;
 	          this.displayKeyboard(_k);
+	          event.preventDefault();
 	        }.bind(_this));
 	      };
 	
@@ -175,7 +181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      for (var i in layout) {
 	        var li = document.createElement('li');
-	        if (layout[i] == 'break') {
+	        if (layout[i][0] === 'break') {
 	          rowsContainer.appendChild(rows[rows.length - 1]);
 	          rows.push(document.createElement('ul'));
 	        } else {
@@ -190,7 +196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            key.textContent = layout[i][0];
 	            key.dataset.pianoKey = layout[i][0];
 	          }
-	          addMultipleListeners(_k.settings.triggerEvents, key, function (event) {
+	          addMultipleListeners(this, _k.settings.triggerEvents, key, function (event) {
 	            debounce(this.keyPressed(event), 300, false);
 	          }.bind(this));
 	          li.appendChild(key);
@@ -198,6 +204,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        rowsContainer.appendChild(rows[rows.length - 1]);
 	
 	        rows[rows.length - 1].appendChild(li);
+	
+	        this.currentTarget.focus();
 	      }
 	
 	      if (isNaN(instance.settings.position.x) || isNaN(instance.settings.position.y)) {
@@ -221,6 +229,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	
 	      document.body.classList.add('piano-open');
+	      this.settings.autoScroll && this.scrollWindow();
 	      if (this.slideContent) {
 	        document.querySelector(this.slideContainer).style.top = '-' + rowsContainer.getBoundingClientRect().height / 2 + 'px';
 	      }
@@ -279,6 +288,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	
 	      input.focus();
+	      event.preventDefault();
+	    }
+	  }, {
+	    key: 'scrollWindow',
+	    value: function scrollWindow() {
+	      var input = this.currentTarget.getBoundingClientRect().top - 100;
+	      var posY = window.scrollY + input;
+	      input > 0 && this.scrollTo(posY, 300);
+	    }
+	  }, {
+	    key: 'scrollTo',
+	    value: function scrollTo(to, duration) {
+	      var _this2 = this;
+	
+	      if (duration <= 0) return;
+	      var difference = to - window.scrollY;
+	      var perTick = difference / duration * 10;
+	      setTimeout(function () {
+	        window.scrollTo(0, window.scrollY + perTick);
+	        if (window.scrollY === to) return;
+	        _this2.scrollTo(to, duration - 10);
+	      }, 10);
 	    }
 	  }, {
 	    key: 'switchCase',
@@ -303,20 +334,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'hideKeyboard',
 	    value: function hideKeyboard() {
-	      var _this2 = this;
+	      var _this3 = this;
 	
-	      if (this.container.firstChild) {
-	        typeof this.onBeforeHidden === 'function' && this.onBeforeHidden();
+	      if (this.container.style.display === 'block') {
+	        typeof this.settings.onBeforeHidden === 'function' && this.settings.onBeforeHidden();
 	        this.container.classList.remove(this.currentKeyboard.settings.animationIn);
 	        this.container.classList.add(this.currentKeyboard.settings.animationOut);
 	        setTimeout(function () {
-	          _this2.container.style.display = 'none';
-	        }, +this.container.style.animationDuration);
+	          _this3.container.style.display = 'none';
+	          typeof _this3.settings.onHidden === 'function' && _this3.settings.onHidden();
+	        }, this.container.style.animationDuration * 1000 || 300);
 	        document.body.classList.remove('piano-open');
 	        if (this.slideContent) {
 	          document.querySelector(this.slideContainer).style.top = 0;
 	        }
-	        typeof this.onHidden === 'function' && this.onHidden();
 	      }
 	    }
 	  }, {
@@ -367,11 +398,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return str.slice(0, index) + (add || '') + str.slice(index + count);
 	}
 	
-	function addMultipleListeners(events, target, handler) {
+	function addMultipleListeners(context, events, target, handler) {
 	  events = events instanceof Array ? events : [events];
 	  for (var i = 0; i < events.length; i++) {
 	    target.addEventListener(events[i], function (event) {
-	      handler(event);
+	      if (event.timeStamp !== context.lastTimeStamp) {
+	        console.log(event);
+	        handler(event);
+	      }
+	      context.lastTimeStamp = event.timeStamp;
 	    });
 	  }
 	}
@@ -399,7 +434,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = Piano;
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;

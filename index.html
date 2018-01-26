@@ -3,51 +3,44 @@
 <head>
   <title>Piano demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="./animate.css">
-  <link rel="stylesheet" type="text/css" href="./piano.css">
-  <style type="text/css">
-    * {
-      padding: 0;
-      margin: 0;
-    }
-    body {
-      overflow: hidden;
-      font-family: sans-serif;
-      background: #EEE;
-      position: absolute;
-      width: 100%;
-      transition: all .3s ease;
-    }
-    input, textarea {
-      width: 50%;
-      margin-right: 50%;
-      line-height: 25px;
-      font-size: 20px;
-      padding: 5px 10px;
-      margin-bottom: 20px;
-      resize: none;
-    }
-    .demo-container {
-      padding: 20px;
-      position: absolute;
-      transition: all .3s ease;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="./demo/css/animate.css">
+  <link rel="stylesheet" type="text/css" href="./demo/css/piano.css">
+  <link rel="icon" type="image/png" href="./demo/img/piano-icon.png" />
+  <link rel="stylesheet" type="text/css" href="./demo/css/base.css"/>
 </head>
 <body>
+  <div class="piano-header">
+    <img src="./piano-icon.png" alt="logo">
+    <h1> ⌨ Piano.js demo</h1>
+
+  </div>
+  <div class="desc">
+    <p>Piano Js is Customizable virtual keyboard written in pure JavaScript. Piano js is browser friendly, common JS and Es6 friendly so can just import it, rquire it, or use script tag to use it. Piano js comes with differents layout you can check it here, or build your own ! </br>
+    You can find all the doc on the git repo: <a href="https://github.com/soixantecircuits/piano">https://github.com/soixantecircuits/piano </a> </br>
+    js-standard-style Join the chat at <a href="https://gitter.im/soixantecircuits/piano">https://gitter.im/soixantecircuits/piano</a>
+    </p>
+  </div>
   <div class="demo-container">
-    <h1>Piano demo</h1>
-    <label for="input-1">right top positionned default layout</label>
-    <input type="text" name="input-1" id="input-1" data-piano data-piano-layout="azerty" data-piano-scale="1.5" data-piano-position="right, top" />
-    <label for="input-1">Email layout</label>
-    <input type="text" name="input-1" id="input-1" data-piano data-piano-layout="azerty-mail" data-piano-scale="1" />
-    <label for="input-2">center middle positionned azerty layout</label>
-    <input type="text" name="input-2" id="input-2" data-piano data-piano-layout="azerty" data-piano-event-id="input-2" data-piano-position="center, middle"/>
-    <label for="input-3">absolute 150 - 150 positionned azerty layout</label>
-    <input type="text" name="input-3" id="input-3" data-piano data-piano-layout="azerty" data-piano-animation-in="bounceInUp" data-piano-animation-out="fadeOutUp" data-piano-position="absolute, 150, 20"/>
-    <label for="textarea">Textarea element</label>
+    <h3 for="input-1">Default layout</h3>
+    <p class="attrDesc"> data-piano-layout="azerty" </br> data-piano-scale="1"</p>
+    <input type="text" placeholder="Click Me !" name="input-1" id="input-1" data-piano data-piano-layout="azerty" data-piano-scale="1" />
+    <h3 for="input-1">Email layout</h3>
+    <p class="attrDesc"> data-piano-layout="azerty-mail" </br> data-piano-scale="1"</p>
+    <input type="text" placeholder="Click Me !" name="input-1" id="input-1" data-piano data-piano-layout="azerty-mail" data-piano-scale="1" />
+    <h3 for="input-1">Right top positionned default layout</h3>
+    <p class="attrDesc"> data-piano-layout="azerty" </br> data-piano-scale="1.5" </br> data-piano-position="right, top"</p>
+    <input type="text" placeholder="Click Me !" name="input-1" id="input-1" data-piano data-piano-layout="azerty" data-piano-scale="1.5" data-piano-position="right, top" />
+    <h3 for="input-2">Center middle positionned azerty layout</h3>
+    <p class="attrDesc">  data-piano-layout="azerty" </br> data-piano-event-id="input-2" </br> data-piano-position="center, middle"</p>
+    <input type="text" placeholder="Click Me !" name="input-2" id="input-2" data-piano data-piano-layout="azerty" data-piano-event-id="input-2" data-piano-position="center, middle"/>
+    <h3 for="input-3">Absolute 150 - 150 positionned azerty layout</h3>
+    <p class="attrDesc"> data-piano-layout="azerty" </br> data-piano-animation-in="bounceInUp" </br> data-piano-animation-out="fadeOutUp" </br> data-piano-position="absolute, 150, 20"</p>
+    <input type="text" placeholder="Click Me !" name="input-3" id="input-3" data-piano data-piano-layout="azerty" data-piano-animation-in="bounceInUp" data-piano-animation-out="fadeOutUp" data-piano-position="absolute, -150, 20"/>
+    <h3 for="textarea">Textarea element</h3>
+    <p class="attrDesc"> data-piano-layout="azerty" </br> data-piano-scale="1"</p>
     <textarea name="textarea" rows="8" cols="40" data-piano data-piano-layout="azerty" data-piano-scale="1"></textarea>
   </div>
-  <script src='./dist/bundle.js'></script>
+  <script src='./demo/dist/piano.js'></script>
+  <script src='./demo/dist/index.js'></script>
 </body>
 </html>

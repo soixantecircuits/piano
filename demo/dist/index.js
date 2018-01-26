@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     [{ name: 'larr', value: '&lsaquo;' }], [{ name: 'space', value: ' ' }], [{ name: 'rarr', value: '&rsaquo;' }], [{ name: 'hide', value: '&times;' }], [{ name: 'submit', value: '&ldsh;' }]
   ]
 
-  var keyboard = new piano({
+  var keyboard = new Piano({
     slideContent: true,
     slideContainer: '.demo-container',
     layouts: {
@@ -30,5 +30,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
   console.log(keyboard)
-
 })

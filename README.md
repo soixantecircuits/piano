@@ -174,8 +174,3 @@ Create a `feature-[name-of-the-feature]` branch and make PR on the `dev` branch.
 
 ## To Do
 - Support accentuation. (partial support for now).
-- Support hammer.js and/or other touch events librarie.
-- Make sure it works well with ~~requireJS~~, AngularJS, MeteorJS, React.
-- Publish it to bower and be famous.
-- Test with IE11, Chrome, Firefox.
-- Test embeded in ~~electron~~ and nwjs.

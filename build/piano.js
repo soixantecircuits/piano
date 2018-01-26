@@ -89,7 +89,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    document.body.appendChild(this.container);
 	    // Make sure to hide keyboard when clicking outside
 	    if (this.settings.autohide) {
-	      addMultipleListeners(this.defaults.triggerEvents, document, function (event) {
+	      addMultipleListeners(this, this.defaults.triggerEvents, document, function (event) {
 	        var dataset = event.target.dataset || {};
 	        if (dataset.piano !== '' && !this.container.contains(event.target)) {
 	          this.hideKeyboard();
@@ -151,10 +151,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	          scale: options.scale || 1
 	        };
 	
-	        addMultipleListeners(_this.defaults.triggerEvents, target, function (event) {
+	        addMultipleListeners(_this, _this.defaults.triggerEvents, target, function (event) {
 	          this.clearKeyboards();
 	          this.currentTarget = event.target;
 	          this.displayKeyboard(_k);
+	          event.preventDefault();
 	        }.bind(_this));
 	      };
 	
@@ -195,7 +196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            key.textContent = layout[i][0];
 	            key.dataset.pianoKey = layout[i][0];
 	          }
-	          addMultipleListeners(_k.settings.triggerEvents, key, function (event) {
+	          addMultipleListeners(this, _k.settings.triggerEvents, key, function (event) {
 	            debounce(this.keyPressed(event), 300, false);
 	          }.bind(this));
 	          li.appendChild(key);
@@ -287,6 +288,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	
 	      input.focus();
+	      event.preventDefault();
 	    }
 	  }, {
 	    key: 'scrollWindow',
@@ -396,15 +398,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return str.slice(0, index) + (add || '') + str.slice(index + count);
 	}
 	
-	function addMultipleListeners(events, target, handler) {
+	function addMultipleListeners(context, events, target, handler) {
 	  events = events instanceof Array ? events : [events];
 	  for (var i = 0; i < events.length; i++) {
 	    target.addEventListener(events[i], function (event) {
-	      handler(event);
-	      if (event.target.classList.contains('key') || event.target.dataset.piano !== undefined) {
-	        console.log(event.type, event.target.id, event.target.className, event.isPrimary);
-	        event.preventDefault();
+	      if (event.timeStamp !== context.lastTimeStamp) {
+	        console.log(event);
+	        handler(event);
 	      }
+	      context.lastTimeStamp = event.timeStamp;
 	    });
 	  }
 	}

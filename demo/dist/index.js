@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
   ]
 
   var keyboard = new piano({
-    triggerEvent: ['click', 'touchstart'],
     slideContent: true,
     slideContainer: '.demo-container',
     layouts: {

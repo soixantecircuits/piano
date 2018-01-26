@@ -8,7 +8,9 @@ class Piano {
       return false
     }
     this.defaults = {
-      triggerEvents: ['click'],
+      triggerEvents: (navigator.userAgent.indexOf('Chrome') !== -1)
+        ? ['pointerup']
+        : ['click', 'touchdown'],
       slideContent: false,
       slideContainer: 'body',
       onBeforeHidden: function () { },
@@ -24,7 +26,7 @@ class Piano {
     document.body.appendChild(this.container)
     // Make sure to hide keyboard when clicking outside
     if (this.settings.autohide) {
-      addMultipleListeners(['click', 'touchdown'], document, function (event) {
+      addMultipleListeners(this.defaults.triggerEvents, document, function (event) {
         var dataset = event.target.dataset || {};
         if (dataset.piano !== '' && !this.container.contains(event.target)) {
           this.hideKeyboard()
@@ -82,7 +84,7 @@ class Piano {
         scale: options.scale || 1
       }
 
-      addMultipleListeners(['click', 'touchdown'], target, function (event) {
+      addMultipleListeners(this.defaults.triggerEvents, target, function (event) {
         this.clearKeyboards()
         this.currentTarget = event.target
         this.displayKeyboard(_k)
@@ -133,6 +135,8 @@ class Piano {
       rowsContainer.appendChild(rows[rows.length - 1])
 
       rows[rows.length - 1].appendChild(li)
+
+      this.currentTarget.focus()
     }
 
     if (isNaN(instance.settings.position.x) || isNaN(instance.settings.position.y)) {
@@ -310,9 +314,13 @@ function insertToString (str, index, count, add) {
 
 function addMultipleListeners (events, target, handler) {
   events = (events instanceof Array) ? events : [events]
-  for (var i = 0; i < events.length; i++) {
-    target.addEventListener(events[i], function (event) {
+  for (let i = 0; i < events.length; i++) {
+    target.addEventListener(events[i], (event) => {
       handler(event)
+      if (event.target.classList.contains('key') || event.target.dataset.piano !== undefined) {
+        console.log(event.type, event.target.id, event.target.className, event.isPrimary)
+        event.preventDefault()
+      }
     })
   }
 }

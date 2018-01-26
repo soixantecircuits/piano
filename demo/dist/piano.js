@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return false;
 	    }
 	    this.defaults = {
-	      triggerEvents: ['click'],
+	      triggerEvents: navigator.userAgent.indexOf('Chrome') !== -1 ? ['pointerup'] : ['click', 'touchdown'],
 	      slideContent: false,
 	      slideContainer: 'body',
 	      onBeforeHidden: function onBeforeHidden() {},
@@ -89,7 +89,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    document.body.appendChild(this.container);
 	    // Make sure to hide keyboard when clicking outside
 	    if (this.settings.autohide) {
-	      addMultipleListeners(['click', 'touchdown'], document, function (event) {
+	      addMultipleListeners(this.defaults.triggerEvents, document, function (event) {
 	        var dataset = event.target.dataset || {};
 	        if (dataset.piano !== '' && !this.container.contains(event.target)) {
 	          this.hideKeyboard();
@@ -151,7 +151,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          scale: options.scale || 1
 	        };
 	
-	        addMultipleListeners(['click', 'touchdown'], target, function (event) {
+	        addMultipleListeners(_this.defaults.triggerEvents, target, function (event) {
 	          this.clearKeyboards();
 	          this.currentTarget = event.target;
 	          this.displayKeyboard(_k);
@@ -203,6 +203,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        rowsContainer.appendChild(rows[rows.length - 1]);
 	
 	        rows[rows.length - 1].appendChild(li);
+	
+	        this.currentTarget.focus();
 	      }
 	
 	      if (isNaN(instance.settings.position.x) || isNaN(instance.settings.position.y)) {
@@ -399,6 +401,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  for (var i = 0; i < events.length; i++) {
 	    target.addEventListener(events[i], function (event) {
 	      handler(event);
+	      if (event.target.classList.contains('key') || event.target.dataset.piano !== undefined) {
+	        console.log(event.type, event.target.id, event.target.className, event.isPrimary);
+	        event.preventDefault();
+	      }
 	    });
 	  }
 	}

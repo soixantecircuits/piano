@@ -3297,12 +3297,12 @@ textarea {
   margin-right: 50%;
   line-height: 25px;
   font-size: 20px;
-  padding: 5px 10px;
+  padding: 5px 1em;
+  border-radius: 0.45em;
   margin-bottom: 20px;
   margin-top: 10px;
   resize: none;
   border: none;
-  border-radius: 18px;
   text-decoration: none;
   -o-appearance: none;
   -moz-appearance: none;
@@ -3322,10 +3322,9 @@ textarea:focus {
 
 .demo-container {
   padding: 20px;
-  position: absolute;
   transition: all .3s ease;
   width: 80%;
-  margin-left: 10%;
+  margin: auto;
 }
 
 img {

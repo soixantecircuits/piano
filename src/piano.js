@@ -8,9 +8,7 @@ class Piano {
       return false
     }
     this.defaults = {
-      triggerEvents: (navigator.userAgent.indexOf('Chrome') !== -1)
-        ? ['pointerup']
-        : ['click', 'touchdown'],
+      triggerEvents: ['click'],
       slideContent: false,
       slideContainer: 'body',
       onBeforeHidden: function () { },
@@ -319,7 +317,6 @@ function addMultipleListeners (context, events, target, handler) {
   for (let i = 0; i < events.length; i++) {
     target.addEventListener(events[i], (event) => {
       if (event.timeStamp !== context.lastTimeStamp) {
-        console.log(event)
         handler(event)
       }
       context.lastTimeStamp = event.timeStamp

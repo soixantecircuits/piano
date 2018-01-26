@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return false;
 	    }
 	    this.defaults = {
-	      triggerEvents: navigator.userAgent.indexOf('Chrome') !== -1 ? ['pointerup'] : ['click', 'touchdown'],
+	      triggerEvents: ['click'],
 	      slideContent: false,
 	      slideContainer: 'body',
 	      onBeforeHidden: function onBeforeHidden() {},
@@ -403,7 +403,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  for (var i = 0; i < events.length; i++) {
 	    target.addEventListener(events[i], function (event) {
 	      if (event.timeStamp !== context.lastTimeStamp) {
-	        console.log(event);
 	        handler(event);
 	      }
 	      context.lastTimeStamp = event.timeStamp;

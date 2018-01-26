@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return false;
 	    }
 	    this.defaults = {
-	      triggerEvents: navigator.userAgent.indexOf('Chrome') !== -1 ? ['pointerup'] : ['click', 'touchdown'],
+	      triggerEvents: ['click'],
 	      slideContent: false,
 	      slideContainer: 'body',
 	      onBeforeHidden: function onBeforeHidden() {},

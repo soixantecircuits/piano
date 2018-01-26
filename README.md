@@ -150,10 +150,7 @@ You can also choose to create your own animations, and thus just use the classes
 
 ### Touch events
 
-For optimal touch support, we suggests you use [`pointerup` or `pointerdown`](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent) event when initializing piano.
-This is preferred because it can catch touch and mouse events in the same event, and will handle long tap, when `touchdown`/`touchup` will lose focus at some point and won't trigger the event.
-
-Default piano instance is initialized with `pointerup` for Chrome (and thus Electron), and `['click', 'touchdown']` for others. Of course, you can override this in the [options](#options).
+By default, Piano uses `click` events, even for touch devices. This is because any decent browser will emulate touch events into `click`, and touch events [make an approximation](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/height) of the pointer's contact position. Of course, you can override this in the [options](#options).
 
 ## Options
 

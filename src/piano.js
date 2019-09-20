@@ -160,8 +160,8 @@ class Piano {
 
     document.body.classList.add('piano-open')
     this.settings.autoScroll && this.scrollWindow()
-    if (this.slideContent) {
-      document.querySelector(this.slideContainer).style.top = '-' + (rowsContainer.getBoundingClientRect().height / 2) + 'px'
+    if (this.settings.slideContent) {
+      document.querySelector(this.settings.slideContainer).style.top = '-' + (rowsContainer.getBoundingClientRect().height / 2) + 'px'
     }
   }
 
@@ -265,8 +265,8 @@ class Piano {
         typeof this.settings.onHidden === 'function' && this.settings.onHidden()
       }, this.container.style.animationDuration * 1000 || 300)
       document.body.classList.remove('piano-open')
-      if (this.slideContent) {
-        document.querySelector(this.slideContainer).style.top = 0
+      if (this.settings.slideContent) {
+        document.querySelector(this.settings.slideContainer).style.top = 0
       }
     }
   }
@@ -278,8 +278,8 @@ class Piano {
       this.container.className = 'piano-container animated'
       this.currentKeyboard = null
       document.body.classList.remove('piano-open')
-      if (this.slideContent) {
-        document.querySelector(this.slideContainer).style.top = 0
+      if (this.settings.slideContent) {
+        document.querySelector(this.settings.slideContainer).style.top = 0
       }
     }
   }

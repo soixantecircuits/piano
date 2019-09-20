@@ -28,6 +28,18 @@
   "bugs": {
     "url": "https://github.com/soixantecircuits/piano/issues"
   },
+  "files":[
+    "build/piano.css",
+    "build/piano.js",
+    "build/piano.js.map",
+    "build/piano.min.js",
+    "build/piano.min.js.map",
+    "layouts/azerty-email.js",
+    "layouts/azerty.js",
+    "layouts/default.js",
+    "layouts/qwerty-4rows.js",
+    "layouts/qwerty-email.js"
+  ],
   "homepage": "https://github.com/soixantecircuits/piano",
   "devDependencies": {
     "babel-core": "^6.3.26",

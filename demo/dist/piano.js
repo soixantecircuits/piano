@@ -230,8 +230,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      document.body.classList.add('piano-open');
 	      this.settings.autoScroll && this.scrollWindow();
-	      if (this.slideContent) {
-	        document.querySelector(this.slideContainer).style.top = '-' + rowsContainer.getBoundingClientRect().height / 2 + 'px';
+	      if (this.settings.slideContent) {
+	        document.querySelector(this.settings.slideContainer).style.top = '-' + rowsContainer.getBoundingClientRect().height / 2 + 'px';
 	      }
 	    }
 	  }, {
@@ -345,8 +345,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          typeof _this3.settings.onHidden === 'function' && _this3.settings.onHidden();
 	        }, this.container.style.animationDuration * 1000 || 300);
 	        document.body.classList.remove('piano-open');
-	        if (this.slideContent) {
-	          document.querySelector(this.slideContainer).style.top = 0;
+	        if (this.settings.slideContent) {
+	          document.querySelector(this.settings.slideContainer).style.top = 0;
 	        }
 	      }
 	    }
@@ -359,8 +359,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.container.className = 'piano-container animated';
 	        this.currentKeyboard = null;
 	        document.body.classList.remove('piano-open');
-	        if (this.slideContent) {
-	          document.querySelector(this.slideContainer).style.top = 0;
+	        if (this.settings.slideContent) {
+	          document.querySelector(this.settings.slideContainer).style.top = 0;
 	        }
 	      }
 	    }
@@ -403,7 +403,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  for (var i = 0; i < events.length; i++) {
 	    target.addEventListener(events[i], function (event) {
 	      if (event.timeStamp !== context.lastTimeStamp) {
-	        console.log(event);
 	        handler(event);
 	      }
 	      context.lastTimeStamp = event.timeStamp;

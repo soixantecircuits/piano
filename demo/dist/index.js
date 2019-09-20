@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var keyboard = new piano({
     slideContent: true,
-    slideContainer: '.demo-container',
+    slideContainer: 'body',
     layouts: {
       'azerty': azerty,
       'azerty-mail': azertyMail

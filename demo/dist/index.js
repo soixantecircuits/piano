@@ -29,6 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log('hidding...')
     }
   })
+  let options = {
+    layout: 'azerty',
+    animationIn: 'bounceInUp',
+    animationOut: 'fadeOutUp',
+    scale: 1.0
+  }
+  keyboard.addTarget(document.querySelector('#dynamic-piano'), options)
   console.log(keyboard)
-
 })

@@ -33,68 +33,79 @@ class Piano {
     }
   }
 
-  detectInputs () {
-    let createKeyboard = (parent, target) => {
-      let _k = Object.assign({}, parent)
-      delete _k.triggers
-      delete _k.layouts
-      var datas = target.dataset
-      var options = {}
+  createKeyboard (parent, target, overrideOptions) {
+    let _k = Object.assign({}, parent)
+    delete _k.triggers
+    delete _k.layouts
+    var datas = target.dataset
+    var options = {}
 
-      _k.shift = false
+    _k.shift = false
 
-      if (datas.pianoPosition) {
-        if (datas.pianoPosition.indexOf('absolute') > -1) {
-          options.position = datas.pianoPosition.replace(/absolute,\s/gi, '').split(',')
-        } else {
-          options.position = (datas.pianoPosition) ? datas.pianoPosition.split(',') : []
-        }
+    if (datas.pianoPosition) {
+      if (datas.pianoPosition.indexOf('absolute') > -1) {
+        options.position = datas.pianoPosition.replace(/absolute,\s/gi, '').split(',')
       } else {
-        //console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target)
-        options.position = []
+        options.position = (datas.pianoPosition) ? datas.pianoPosition.split(',') : []
       }
-      // Object.assign(options, datas)
+    } else {
+      //console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target)
+      options.position = []
+    }
+    // Object.assign(options, datas)
 
-      options.layout = datas.pianoLayout
-      options.limit = datas.pianoLimit
-      options.animationIn = datas.pianoAnimationIn
-      options.animationOut = datas.pianoAnimationOut
-      options.scale = datas.pianoScale
+    options.layout = datas.pianoLayout
+    options.limit = datas.pianoLimit
+    options.animationIn = datas.pianoAnimationIn
+    options.animationOut = datas.pianoAnimationOut
+    options.scale = datas.pianoScale
 
-      let eventID = datas.pianoEventId
-      let elementEvent = null
-      if (eventID) {
-        elementEvent = document.createEvent('Event')
-        elementEvent.initEvent(eventID, true, true)
-      }
-
-      // could be improve with a default object
-      _k.settings = {
-        position: {
-          x: options.position[0] || 'center',
-          y: options.position[1] || 'bottom'
-        },
-        layout: options.layout || 'default',
-        limit: options.limit || -1,
-        submitEvent: elementEvent,
-        animationIn: options.animationIn || 'fadeInUp',
-        animationOut: options.animationOut || 'fadeOutDown',
-        scale: options.scale || 1
-      }
-
-      addMultipleListeners(this, this.defaults.triggerEvents, target, function (event) {
-        this.clearKeyboards()
-        this.currentTarget = event.target
-        this.displayKeyboard(_k)
-        event.preventDefault()
-      }.bind(this))
+    if (overrideOptions) {
+      options = Object.assign(options, overrideOptions)
     }
 
+    console.log(options)
+
+    let eventID = datas.pianoEventId
+    let elementEvent = null
+    if (eventID) {
+      elementEvent = document.createEvent('Event')
+      elementEvent.initEvent(eventID, true, true)
+    }
+
+    // could be improve with a default object
+    _k.settings = {
+      position: {
+        x: options.position[0] || 'center',
+        y: options.position[1] || 'bottom'
+      },
+      layout: options.layout || 'default',
+      limit: options.limit || -1,
+      submitEvent: elementEvent,
+      animationIn: options.animationIn || 'fadeInUp',
+      animationOut: options.animationOut || 'fadeOutDown',
+      scale: options.scale || 1
+    }
+
+    addMultipleListeners(this, this.defaults.triggerEvents, target, function (event) {
+      this.clearKeyboards()
+      this.currentTarget = event.target
+      this.displayKeyboard(_k)
+      event.preventDefault()
+    }.bind(this))
+  }
+
+  detectInputs () {
     this.triggers = document.querySelectorAll('[data-piano]')
     let triggerSize = this.triggers.length
     for (var triggerIdx = 0; triggerIdx < triggerSize; triggerIdx++) {
-      createKeyboard(this, this.triggers[triggerIdx])
+      console.log(this, this.triggers[triggerIdx])
+      this.createKeyboard(this, this.triggers[triggerIdx])
     }
+  }
+
+  addTarget (el, options) {
+    this.createKeyboard(this, el, options)
   }
 
   displayKeyboard (instance) {

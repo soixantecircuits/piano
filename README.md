@@ -106,6 +106,40 @@ document
   .addEventListener('do-stuff', doStuffCallback)
 ```
 
+## Method 
+
+### addTarget()
+
+`addTarget` method allow to dynamically add an input trigger for your on screen screen keyboard.
+
+```
+addTarget(element, options)
+```
+
+You need to provide a domElement and basic options object : 
+
+```
+{
+  layout: 'azerty',
+  animationIn: 'bounceInUp',
+  animationOut: 'fadeOutUp',
+  scale: 1.0
+}
+```
+
+So if you already have your keyboard instance and an element in the DOM namde `#dynamic-piano` you can:
+
+```
+let options = {
+    layout: 'azerty',
+    animationIn: 'bounceInUp',
+    animationOut: 'fadeOutUp',
+    scale: 1.0
+  }
+keyboard.addTarget(document.querySelector('#dynamic-piano'), options)
+```
+
+
 ## Usage
 
 ### Positionning / styling

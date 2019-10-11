@@ -99,71 +99,82 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  _createClass(Piano, [{
-	    key: 'detectInputs',
-	    value: function detectInputs() {
-	      var _this = this;
+	    key: 'createKeyboard',
+	    value: function createKeyboard(parent, target, overrideOptions) {
+	      var _k = _extends({}, parent);
+	      delete _k.triggers;
+	      delete _k.layouts;
+	      var datas = target.dataset;
+	      var options = {};
 	
-	      var createKeyboard = function createKeyboard(parent, target) {
-	        var _k = _extends({}, parent);
-	        delete _k.triggers;
-	        delete _k.layouts;
-	        var datas = target.dataset;
-	        var options = {};
+	      _k.shift = false;
 	
-	        _k.shift = false;
-	
-	        if (datas.pianoPosition) {
-	          if (datas.pianoPosition.indexOf('absolute') > -1) {
-	            options.position = datas.pianoPosition.replace(/absolute,\s/gi, '').split(',');
-	          } else {
-	            options.position = datas.pianoPosition ? datas.pianoPosition.split(',') : [];
-	          }
+	      if (datas.pianoPosition) {
+	        if (datas.pianoPosition.indexOf('absolute') > -1) {
+	          options.position = datas.pianoPosition.replace(/absolute,\s/gi, '').split(',');
 	        } else {
-	          //console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target)
-	          options.position = [];
+	          options.position = datas.pianoPosition ? datas.pianoPosition.split(',') : [];
 	        }
-	        // Object.assign(options, datas)
+	      } else {
+	        //console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target)
+	        options.position = [];
+	      }
+	      // Object.assign(options, datas)
 	
-	        options.layout = datas.pianoLayout;
-	        options.limit = datas.pianoLimit;
-	        options.animationIn = datas.pianoAnimationIn;
-	        options.animationOut = datas.pianoAnimationOut;
-	        options.scale = datas.pianoScale;
+	      options.layout = datas.pianoLayout;
+	      options.limit = datas.pianoLimit;
+	      options.animationIn = datas.pianoAnimationIn;
+	      options.animationOut = datas.pianoAnimationOut;
+	      options.scale = datas.pianoScale;
 	
-	        var eventID = datas.pianoEventId;
-	        var elementEvent = null;
-	        if (eventID) {
-	          elementEvent = document.createEvent('Event');
-	          elementEvent.initEvent(eventID, true, true);
-	        }
+	      if (overrideOptions) {
+	        options = _extends(options, overrideOptions);
+	      }
 	
-	        // could be improve with a default object
-	        _k.settings = {
-	          position: {
-	            x: options.position[0] || 'center',
-	            y: options.position[1] || 'bottom'
-	          },
-	          layout: options.layout || 'default',
-	          limit: options.limit || -1,
-	          submitEvent: elementEvent,
-	          animationIn: options.animationIn || 'fadeInUp',
-	          animationOut: options.animationOut || 'fadeOutDown',
-	          scale: options.scale || 1
-	        };
+	      console.log(options);
 	
-	        addMultipleListeners(_this, _this.defaults.triggerEvents, target, function (event) {
-	          this.clearKeyboards();
-	          this.currentTarget = event.target;
-	          this.displayKeyboard(_k);
-	          event.preventDefault();
-	        }.bind(_this));
+	      var eventID = datas.pianoEventId;
+	      var elementEvent = null;
+	      if (eventID) {
+	        elementEvent = document.createEvent('Event');
+	        elementEvent.initEvent(eventID, true, true);
+	      }
+	
+	      // could be improve with a default object
+	      _k.settings = {
+	        position: {
+	          x: options.position[0] || 'center',
+	          y: options.position[1] || 'bottom'
+	        },
+	        layout: options.layout || 'default',
+	        limit: options.limit || -1,
+	        submitEvent: elementEvent,
+	        animationIn: options.animationIn || 'fadeInUp',
+	        animationOut: options.animationOut || 'fadeOutDown',
+	        scale: options.scale || 1
 	      };
 	
+	      addMultipleListeners(this, this.defaults.triggerEvents, target, function (event) {
+	        this.clearKeyboards();
+	        this.currentTarget = event.target;
+	        this.displayKeyboard(_k);
+	        event.preventDefault();
+	      }.bind(this));
+	    }
+	  }, {
+	    key: 'detectInputs',
+	    value: function detectInputs() {
 	      this.triggers = document.querySelectorAll('[data-piano]');
 	      var triggerSize = this.triggers.length;
 	      for (var triggerIdx = 0; triggerIdx < triggerSize; triggerIdx++) {
-	        createKeyboard(this, this.triggers[triggerIdx]);
+	        console.log(this, this.triggers[triggerIdx]);
+	        this.createKeyboard(this, this.triggers[triggerIdx]);
 	      }
+	    }
+	  }, {
+	    key: 'addTarget',
+	    value: function addTarget(el, options) {
+	      this.createKeyboard(this, el, options);
 	    }
 	  }, {
 	    key: 'displayKeyboard',
@@ -300,7 +311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'scrollTo',
 	    value: function scrollTo(to, duration) {
-	      var _this2 = this;
+	      var _this = this;
 	
 	      if (duration <= 0) return;
 	      var difference = to - window.scrollY;
@@ -308,7 +319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      setTimeout(function () {
 	        window.scrollTo(0, window.scrollY + perTick);
 	        if (window.scrollY === to) return;
-	        _this2.scrollTo(to, duration - 10);
+	        _this.scrollTo(to, duration - 10);
 	      }, 10);
 	    }
 	  }, {
@@ -334,15 +345,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'hideKeyboard',
 	    value: function hideKeyboard() {
-	      var _this3 = this;
+	      var _this2 = this;
 	
 	      if (this.container.style.display === 'block') {
 	        typeof this.settings.onBeforeHidden === 'function' && this.settings.onBeforeHidden();
 	        this.container.classList.remove(this.currentKeyboard.settings.animationIn);
 	        this.container.classList.add(this.currentKeyboard.settings.animationOut);
 	        setTimeout(function () {
-	          _this3.container.style.display = 'none';
-	          typeof _this3.settings.onHidden === 'function' && _this3.settings.onHidden();
+	          _this2.container.style.display = 'none';
+	          typeof _this2.settings.onHidden === 'function' && _this2.settings.onHidden();
 	        }, this.container.style.animationDuration * 1000 || 300);
 	        document.body.classList.remove('piano-open');
 	        if (this.settings.slideContent) {

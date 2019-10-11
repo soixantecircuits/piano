@@ -8,6 +8,10 @@
 
 > Customizable virtual keyboard written in plain JavaScript. See the [demo](http://soixantecircuits.github.io/piano).
 
+The easiest way to put a keyboard in front of your users. Piano is a simple and extensible [On-Screen keyboard](https://en.wikipedia.org/wiki/Virtual_keyboard). It allows to provide elegant solution for virtual keyboard in a touch application. 
+
+Tested in Electron and Chrome kiosk.
+
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Join the chat at https://gitter.im/soixantecircuits/piano](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/soixantecircuits/piano?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

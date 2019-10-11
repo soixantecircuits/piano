@@ -21,7 +21,9 @@
   "keywords": [
     "piano",
     "piano.js",
-    "keyboard"
+    "keyboard",
+    "osk",
+    "onscreen"
   ],
   "author": "Soixante circuits <contact@soixantecircuits.fr>",
   "license": "MIT",

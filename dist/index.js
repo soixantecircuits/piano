@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
     [{ name: 'larr', value: '&lsaquo;' }], [{ name: 'space', value: ' ' }], [{ name: 'rarr', value: '&rsaquo;' }], [{ name: 'hide', value: '&times;' }], [{ name: 'submit', value: '&ldsh;' }]
   ]
 
-  var keyboard = new Piano({
+  var keyboard = new piano({
     slideContent: true,
-    slideContainer: '.demo-container',
+    slideContainer: 'body',
     layouts: {
       'azerty': azerty,
       'azerty-mail': azertyMail
@@ -29,5 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log('hidding...')
     }
   })
+  let options = {
+    layout: 'azerty',
+    animationIn: 'bounceInUp',
+    animationOut: 'fadeOutUp',
+    scale: 1.0
+  }
+  keyboard.addTarget(document.querySelector('#dynamic-piano'), options)
   console.log(keyboard)
 })

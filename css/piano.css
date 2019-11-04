@@ -31,16 +31,11 @@
   -khtml-transition: all .3s ease;
   -o-transition: all .3s ease;
   transition: all .3s ease;
-<<<<<<< HEAD:piano.css
-=======
   animation-duration: .3s;
->>>>>>> master:demo/css/piano.css
 }
 .piano-container .piano-rows {
   padding: 1em 0;
   position: relative;
-<<<<<<< HEAD:piano.css
-=======
 }
 .piano-rows::after {
     background: black;
@@ -56,7 +51,6 @@
     opacity: 0.5;
     top: 0;
     left: 0;
->>>>>>> master:demo/css/piano.css
 }
 .piano-container ul {
   margin: auto;

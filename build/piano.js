@@ -94,7 +94,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.settings.autohide) {
 	      var handler = function handler(event) {
 	        var dataset = event.target.dataset || {};
-	        if (dataset.piano !== '' && !_this.container.contains(event.target)) {
+	        if (dataset.piano !== '' && _this.container && !_this.container.contains(event.target)) {
 	          _this.hideKeyboard();
 	        }
 	      };

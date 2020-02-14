@@ -1,6 +1,6 @@
 {
   "name": "piano.js",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Customizable virtual keyboard written in pure ES6",
   "main": "./build/piano.js",
   "style": "./build/piano.css",

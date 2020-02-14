@@ -27,7 +27,7 @@ class Piano {
     if (this.settings.autohide) {
       var handler = (event) => {
         var dataset = event.target.dataset || {};
-        if (dataset.piano !== '' && !this.container.contains(event.target)) {
+        if (dataset.piano !== '' && (this.container && !this.container.contains(event.target))) {
           this.hideKeyboard()
         }
       }

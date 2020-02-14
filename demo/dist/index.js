@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     [{ name: 'larr', value: '&lsaquo;' }], [{ name: 'space', value: ' ' }], [{ name: 'rarr', value: '&rsaquo;' }], [{ name: 'hide', value: '&times;' }], [{ name: 'submit', value: '&ldsh;' }]
   ]
 
-  var keyboard = new piano({
+  window.pianoKeyboard = new piano({
     slideContent: true,
     slideContainer: 'body',
     layouts: {
@@ -35,6 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     animationOut: 'fadeOutUp',
     scale: 1.0
   }
-  keyboard.addTarget(document.querySelector('#dynamic-piano'), options)
-  console.log(keyboard)
+  window.pianoKeyboard.addTarget(document.querySelector('#dynamic-piano'), options)
+  // console.log(window.pianoKeyboard)
 })

@@ -4,7 +4,7 @@ class Piano {
 
   constructor (options) {
     if (document.querySelectorAll('#piano').length) {
-      console.warn('piano is already initialized')
+      console.warn('piano is already initialized, not creating.')
       return false
     }
     this.defaults = {
@@ -17,26 +17,29 @@ class Piano {
       autohide: true,
       autoScroll: true
     }
-
+    this.pianoEnhancedEvents = []
+    this.pianoInstance = []
     this.settings = Object.assign(this.defaults, options)
     this.container = Object.assign(document.createElement('div'), { id: 'piano', className: 'piano-container animated' })
     this.detectInputs()
     document.body.appendChild(this.container)
     // Make sure to hide keyboard when clicking outside
     if (this.settings.autohide) {
-      addMultipleListeners(this, this.defaults.triggerEvents, document, function (event) {
+      var handler = (event) => {
         var dataset = event.target.dataset || {};
         if (dataset.piano !== '' && !this.container.contains(event.target)) {
           this.hideKeyboard()
         }
-      }.bind(this))
+      }
+      addMultipleListeners(this, document, this.defaults.triggerEvents, document, handler)
     }
   }
 
   createKeyboard (parent, target, overrideOptions) {
     let _k = Object.assign({}, parent)
+    delete _k.pianoInstance
     delete _k.triggers
-    delete _k.layouts
+    delete _k.layouts    
     var datas = target.dataset
     var options = {}
 
@@ -52,7 +55,6 @@ class Piano {
       //console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target)
       options.position = []
     }
-    // Object.assign(options, datas)
 
     options.layout = datas.pianoLayout
     options.limit = datas.pianoLimit
@@ -63,8 +65,6 @@ class Piano {
     if (overrideOptions) {
       options = Object.assign(options, overrideOptions)
     }
-
-    console.log(options)
 
     let eventID = datas.pianoEventId
     let elementEvent = null
@@ -86,20 +86,21 @@ class Piano {
       animationOut: options.animationOut || 'fadeOutDown',
       scale: options.scale || 1
     }
-
-    addMultipleListeners(this, this.defaults.triggerEvents, target, function (event) {
-      this.clearKeyboards()
+    var handler = (event) => {
+      this.clearKeyboards(_k, this)
       this.currentTarget = event.target
       this.displayKeyboard(_k)
       event.preventDefault()
-    }.bind(this))
+    }
+    addMultipleListeners(this, _k, this.defaults.triggerEvents, target, handler)
+    this.pianoInstance.push(_k)
   }
 
   detectInputs () {
     this.triggers = document.querySelectorAll('[data-piano]')
     let triggerSize = this.triggers.length
     for (var triggerIdx = 0; triggerIdx < triggerSize; triggerIdx++) {
-      console.log(this, this.triggers[triggerIdx])
+      // console.log(this, this.triggers[triggerIdx])
       this.createKeyboard(this, this.triggers[triggerIdx])
     }
   }
@@ -137,7 +138,7 @@ class Piano {
           key.textContent = layout[i][0]
           key.dataset.pianoKey = layout[i][0]
         }
-        addMultipleListeners(this, _k.settings.triggerEvents, key, function (event) {
+        addMultipleListeners(this, _k, _k.settings.triggerEvents, key, function (event) {
           debounce(this.keyPressed(event), 300, false)
         }.bind(this))
         li.appendChild(key)
@@ -282,8 +283,9 @@ class Piano {
     }
   }
 
-  clearKeyboards () {
-    if (this.container.firstChild) {
+  clearKeyboards (k, parent, master) {
+    removeMultipleEventListener(k, master)
+    if (this.container && this.container.firstChild) {
       this.container.firstChild.remove()
       this.container.style.top = this.container.style.left = ''
       this.container.className = 'piano-container animated'
@@ -300,8 +302,27 @@ class Piano {
   }
 
   destroy () {
-    this.clearKeyboards()
-    this.container.remove()
+    if (this.pianoInstance) {
+      this.pianoInstance.forEach(instance => {
+        this.clearKeyboards(instance, this)
+      })
+    }
+    if (document.pianoEnhancedEvents) {
+      document.pianoEnhancedEvents.forEach(ee => {
+        ee.forEach(el => {
+          el.target.removeEventListener(el.event, el.eventHandler)
+        })
+      })
+    }
+    if (this.container) {
+      this.container.remove()
+    }
+    this.defaults = null
+    this.pianoEnhancedEvents = null
+    this.pianoInstance = null
+    this.settings = null
+    this.container = null
+    return null
   }
 }
 
@@ -323,16 +344,41 @@ function insertToString (str, index, count, add) {
   return str.slice(0, index) + (add || '') + str.slice(index + count)
 }
 
-function addMultipleListeners (context, events, target, handler) {
-  events = (events instanceof Array) ? events : [events]
-  for (let i = 0; i < events.length; i++) {
-    target.addEventListener(events[i], (event) => {
-      if (event.timeStamp !== context.lastTimeStamp) {
-        handler(event)
-      }
-      context.lastTimeStamp = event.timeStamp
+function removeMultipleEventListener (pianoInstance, master) {
+    pianoInstance.pianoEnhancedEvents.forEach(ee => {
+      ee.forEach(el => {
+        if ((el.target.dataset && el.target.dataset.pianoKey) || master) {
+          el.target.removeEventListener(el.eventName, el.eventHandler)
+        }
+      })
     })
+    pianoInstance.pianoEnhancedEvents = []
+}
+
+function addMultipleListeners (context, child, events, target, handler) {
+  if(child.pianoEnhancedEvents && child.pianoEnhancedEvents.length > -1) {
+    child.pianoEnhancedEvents.push([])
+  } else {
+    child.pianoEnhancedEvents = []
+    child.pianoEnhancedEvents.push([])
   }
+  events = (events instanceof Array) ? events : [events]
+  events.forEach(eventName => {
+    child.pianoEnhancedEvents[child.pianoEnhancedEvents.length-1].push({
+      eventName,
+      target,
+      eventHandler: (event) => { 
+        if (event.timeStamp !== context.lastTimeStamp) {
+          handler(event)
+        }
+        context.lastTimeStamp = event.timeStamp 
+      }
+    })
+  })
+  child.pianoEnhancedEvents[child.pianoEnhancedEvents.length-1].forEach(ee => {
+      ee.target.addEventListener(ee.eventName, ee.eventHandler)
+  })
+
 }
 
 // Helpers function for piano object

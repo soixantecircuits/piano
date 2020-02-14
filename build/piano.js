@@ -66,10 +66,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var Piano = function () {
 	  function Piano(options) {
+	    var _this = this;
+	
 	    _classCallCheck(this, Piano);
 	
 	    if (document.querySelectorAll('#piano').length) {
-	      console.warn('piano is already initialized');
+	      console.warn('piano is already initialized, not creating.');
 	      return false;
 	    }
 	    this.defaults = {
@@ -82,26 +84,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	      autohide: true,
 	      autoScroll: true
 	    };
-	
+	    this.pianoEnhancedEvents = [];
+	    this.pianoInstance = [];
 	    this.settings = _extends(this.defaults, options);
 	    this.container = _extends(document.createElement('div'), { id: 'piano', className: 'piano-container animated' });
 	    this.detectInputs();
 	    document.body.appendChild(this.container);
 	    // Make sure to hide keyboard when clicking outside
 	    if (this.settings.autohide) {
-	      addMultipleListeners(this, this.defaults.triggerEvents, document, function (event) {
+	      var handler = function handler(event) {
 	        var dataset = event.target.dataset || {};
-	        if (dataset.piano !== '' && !this.container.contains(event.target)) {
-	          this.hideKeyboard();
+	        if (dataset.piano !== '' && !_this.container.contains(event.target)) {
+	          _this.hideKeyboard();
 	        }
-	      }.bind(this));
+	      };
+	      addMultipleListeners(this, document, this.defaults.triggerEvents, document, handler);
 	    }
 	  }
 	
 	  _createClass(Piano, [{
 	    key: 'createKeyboard',
 	    value: function createKeyboard(parent, target, overrideOptions) {
+	      var _this2 = this;
+	
 	      var _k = _extends({}, parent);
+	      delete _k.pianoInstance;
 	      delete _k.triggers;
 	      delete _k.layouts;
 	      var datas = target.dataset;
@@ -119,7 +126,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        //console.warn('It seems you have incorrect values in your data-piano-position attribute on element: ', target)
 	        options.position = [];
 	      }
-	      // Object.assign(options, datas)
 	
 	      options.layout = datas.pianoLayout;
 	      options.limit = datas.pianoLimit;
@@ -130,8 +136,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (overrideOptions) {
 	        options = _extends(options, overrideOptions);
 	      }
-	
-	      console.log(options);
 	
 	      var eventID = datas.pianoEventId;
 	      var elementEvent = null;
@@ -153,13 +157,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        animationOut: options.animationOut || 'fadeOutDown',
 	        scale: options.scale || 1
 	      };
-	
-	      addMultipleListeners(this, this.defaults.triggerEvents, target, function (event) {
-	        this.clearKeyboards();
-	        this.currentTarget = event.target;
-	        this.displayKeyboard(_k);
+	      var handler = function handler(event) {
+	        _this2.clearKeyboards(_k, _this2);
+	        _this2.currentTarget = event.target;
+	        _this2.displayKeyboard(_k);
 	        event.preventDefault();
-	      }.bind(this));
+	      };
+	      addMultipleListeners(this, _k, this.defaults.triggerEvents, target, handler);
+	      this.pianoInstance.push(_k);
 	    }
 	  }, {
 	    key: 'detectInputs',
@@ -167,7 +172,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.triggers = document.querySelectorAll('[data-piano]');
 	      var triggerSize = this.triggers.length;
 	      for (var triggerIdx = 0; triggerIdx < triggerSize; triggerIdx++) {
-	        console.log(this, this.triggers[triggerIdx]);
+	        // console.log(this, this.triggers[triggerIdx])
 	        this.createKeyboard(this, this.triggers[triggerIdx]);
 	      }
 	    }
@@ -207,7 +212,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            key.textContent = layout[i][0];
 	            key.dataset.pianoKey = layout[i][0];
 	          }
-	          addMultipleListeners(this, _k.settings.triggerEvents, key, function (event) {
+	          addMultipleListeners(this, _k, _k.settings.triggerEvents, key, function (event) {
 	            debounce(this.keyPressed(event), 300, false);
 	          }.bind(this));
 	          li.appendChild(key);
@@ -311,7 +316,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'scrollTo',
 	    value: function scrollTo(to, duration) {
-	      var _this = this;
+	      var _this3 = this;
 	
 	      if (duration <= 0) return;
 	      var difference = to - window.scrollY;
@@ -319,7 +324,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      setTimeout(function () {
 	        window.scrollTo(0, window.scrollY + perTick);
 	        if (window.scrollY === to) return;
-	        _this.scrollTo(to, duration - 10);
+	        _this3.scrollTo(to, duration - 10);
 	      }, 10);
 	    }
 	  }, {
@@ -345,15 +350,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'hideKeyboard',
 	    value: function hideKeyboard() {
-	      var _this2 = this;
+	      var _this4 = this;
 	
 	      if (this.container.style.display === 'block') {
 	        typeof this.settings.onBeforeHidden === 'function' && this.settings.onBeforeHidden();
 	        this.container.classList.remove(this.currentKeyboard.settings.animationIn);
 	        this.container.classList.add(this.currentKeyboard.settings.animationOut);
 	        setTimeout(function () {
-	          _this2.container.style.display = 'none';
-	          typeof _this2.settings.onHidden === 'function' && _this2.settings.onHidden();
+	          _this4.container.style.display = 'none';
+	          typeof _this4.settings.onHidden === 'function' && _this4.settings.onHidden();
 	        }, this.container.style.animationDuration * 1000 || 300);
 	        document.body.classList.remove('piano-open');
 	        if (this.settings.slideContent) {
@@ -363,8 +368,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'clearKeyboards',
-	    value: function clearKeyboards() {
-	      if (this.container.firstChild) {
+	    value: function clearKeyboards(k, parent, master) {
+	      removeMultipleEventListener(k, master);
+	      if (this.container && this.container.firstChild) {
 	        this.container.firstChild.remove();
 	        this.container.style.top = this.container.style.left = '';
 	        this.container.className = 'piano-container animated';
@@ -383,8 +389,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'destroy',
 	    value: function destroy() {
-	      this.clearKeyboards();
-	      this.container.remove();
+	      var _this5 = this;
+	
+	      if (this.pianoInstance) {
+	        this.pianoInstance.forEach(function (instance) {
+	          _this5.clearKeyboards(instance, _this5);
+	        });
+	      }
+	      if (document.pianoEnhancedEvents) {
+	        document.pianoEnhancedEvents.forEach(function (ee) {
+	          ee.forEach(function (el) {
+	            el.target.removeEventListener(el.event, el.eventHandler);
+	          });
+	        });
+	      }
+	      if (this.container) {
+	        this.container.remove();
+	      }
+	      this.defaults = null;
+	      this.pianoEnhancedEvents = null;
+	      this.pianoInstance = null;
+	      this.settings = null;
+	      this.container = null;
+	      return null;
 	    }
 	  }]);
 	
@@ -409,16 +436,40 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return str.slice(0, index) + (add || '') + str.slice(index + count);
 	}
 	
-	function addMultipleListeners(context, events, target, handler) {
-	  events = events instanceof Array ? events : [events];
-	  for (var i = 0; i < events.length; i++) {
-	    target.addEventListener(events[i], function (event) {
-	      if (event.timeStamp !== context.lastTimeStamp) {
-	        handler(event);
+	function removeMultipleEventListener(pianoInstance, master) {
+	  pianoInstance.pianoEnhancedEvents.forEach(function (ee) {
+	    ee.forEach(function (el) {
+	      if (el.target.dataset && el.target.dataset.pianoKey || master) {
+	        el.target.removeEventListener(el.eventName, el.eventHandler);
 	      }
-	      context.lastTimeStamp = event.timeStamp;
 	    });
+	  });
+	  pianoInstance.pianoEnhancedEvents = [];
+	}
+	
+	function addMultipleListeners(context, child, events, target, handler) {
+	  if (child.pianoEnhancedEvents && child.pianoEnhancedEvents.length > -1) {
+	    child.pianoEnhancedEvents.push([]);
+	  } else {
+	    child.pianoEnhancedEvents = [];
+	    child.pianoEnhancedEvents.push([]);
 	  }
+	  events = events instanceof Array ? events : [events];
+	  events.forEach(function (eventName) {
+	    child.pianoEnhancedEvents[child.pianoEnhancedEvents.length - 1].push({
+	      eventName: eventName,
+	      target: target,
+	      eventHandler: function eventHandler(event) {
+	        if (event.timeStamp !== context.lastTimeStamp) {
+	          handler(event);
+	        }
+	        context.lastTimeStamp = event.timeStamp;
+	      }
+	    });
+	  });
+	  child.pianoEnhancedEvents[child.pianoEnhancedEvents.length - 1].forEach(function (ee) {
+	    ee.target.addEventListener(ee.eventName, ee.eventHandler);
+	  });
 	}
 	
 	// Helpers function for piano object
